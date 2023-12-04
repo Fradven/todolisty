@@ -15,6 +15,7 @@
     --button-primary-color-hovered: #85b8ff;
     --background-color-green-bolder: #4bce97;
     --background-color-green-subtler: #216e4e;
+    --background-color-nav-link-active: hsla(0, 0%, 100%, 0.3);
 }
 
 *,
@@ -41,7 +42,9 @@ body {
 
 /* BUTTONS  */
 
-.link {
+.link,
+.link:focus,
+.link:visited {
     text-decoration: none;
     color: var(--main-color);
 }
@@ -102,11 +105,17 @@ header nav a {
     padding: 0.6rem 1.2rem;
     border-radius: 0.5rem;
     width: fit-content;
+    width: -moz-fit-content;
 }
 
 header .logo-link:hover,
 header nav a:hover {
     background-color: var(--background-color-hovered);
+}
+
+header .navbar .nav-link:active {
+    background-color: var(--background-color-nav-link-active);
+    color: #4da3ff;
 }
 
 header .logo-img {
@@ -285,26 +294,27 @@ nav a {
     flex-grow: 1;
 }
 
-.sidebar-nav > * {
+.sidebar-nav .sidebar-link > * {
     padding-bottom: 1rem;
 }
 
-.sidebar-link {
+.sidebar-link a,
+.sidebar-link.sidebar-subsection {
     display: flex;
     padding: 0.8rem 2rem;
     align-items: center;
     gap: 1rem;
 }
 
-.sidebar-link:hover {
+.sidebar-link:not(.sidebar-subsection):hover {
     background-color: hsla(0, 0%, 100%, 0.16);
 }
 
-.sidebar-link:active {
-    background-color: hsla(0, 0%, 100%, 0.3);
+.sidebar-link:not(.sidebar-subsection):active {
+    background-color: var(--background-color-nav-link-active);
 }
 
-.sidebar-subsection ~ .sidebar-link {
+.sidebar-subsection ~ .sidebar-link a {
     padding-bottom: 1rem;
 }
 
@@ -320,7 +330,6 @@ nav a {
 
 .icon-plus {
     margin-left: auto;
-    height: 1.4rem;
     width: 1.4rem;
 }
 
@@ -345,7 +354,5 @@ nav a {
 
 #content {
     padding: 3rem;
-    /* background-image: url(../assets/images/dashboard-bg.jpg); */
-    /* background-size: cover; */
     background-color: var(--main-color);
 }
