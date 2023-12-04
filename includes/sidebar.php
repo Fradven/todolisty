@@ -56,7 +56,7 @@
             <div class="sidebar-link">
                 <a class="link" href="#">
                     <img class="sidebar-nav-icon" src="./assets/images/" alt="">
-                    <span>Tâches</a>
+                    <span>Tâches</span>
                 </a>
             </div>
         </li>
