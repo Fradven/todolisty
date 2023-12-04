@@ -11,18 +11,24 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-link">
-            <img class="sidebar-nav-icon" src="./assets/images/board.png" alt="">
-            <a class="link" href="">Tableaux</a>
+            <a class="link" href="#">
+                <img class="sidebar-nav-icon" src="./assets/images/board.png" alt="">
+                <span>Tableaux</span>
+            </a>
         </li>
         <li class="sidebar-link">
-            <img class="sidebar-nav-icon" src="./assets/images/user.png" alt="">
-            <a class="link" href="">Membres</a>
-            <img class="icon-plus" src="./assets/images/plus.png" alt="">
+            <a class="link" href="./members.php">
+                <img class="sidebar-nav-icon" src="./assets/images/user.png" alt="">
+                <span class="link">Membres</span>
+                <img class="icon-plus" src="./assets/images/plus.png" alt="">
+            </a>
         </li>
         <li class="sidebar-link">
-            <img class="sidebar-nav-icon" src="./assets/images/settings.png" alt="">
-            <a class="link" href="">Paramètres d'espace de travail</a>
-            <img class="icon-carret-down" src="./assets/images/carret-down.png" alt="">
+            <a class="link" href="#">
+                <img class="sidebar-nav-icon" src="./assets/images/settings.png" alt="">
+                <span>Paramètres d'espace de travail</span>
+                <img class="icon-carret-down" src="./assets/images/carret-down.png" alt="">
+            </a>
         </li>
         <li>
             <div class="sidebar-link sidebar-subsection">
@@ -30,12 +36,16 @@
                 <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
-                <img class="sidebar-nav-icon" src="./assets/images/tableur.png" alt="">
-                <a class="link" href="">Tableur</a>
+                <a class="link" href="#">
+                    <img class="sidebar-nav-icon" src="./assets/images/tableur.png" alt="">
+                    <span>Tableur</span>
+                </a>
             </div>
             <div class="sidebar-link">
-                <img class="sidebar-nav-icon" src="./assets/images/calendar.png" alt="">
-                <a class="link" href="">Calendrier</a>
+                <a class="link" href="#">
+                    <img class="sidebar-nav-icon" src="./assets/images/calendar.png" alt="">
+                    <span>Calendrier</span>
+                </a>
             </div>
         </li>
         <li>
@@ -44,8 +54,10 @@
                 <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
-                <img class="sidebar-nav-icon" src="./assets/images/" alt="">
-                <a class="link" href="">Tâches</a>
+                <a class="link" href="#">
+                    <img class="sidebar-nav-icon" src="./assets/images/" alt="">
+                    <span>Tâches</a>
+                </a>
             </div>
         </li>
     </ul>

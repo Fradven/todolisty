@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todolisty</title>
+    <title>Todolisty | Empower Your Day</title>
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon//apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
 </head>
 
 <body>
@@ -13,22 +17,22 @@
         <a class="logo-link" href="#">
             <img class="logo-img" src="./assets/images/logo-trello-anim.gif" alt="logo" />
         </a>
-        <nav>
+        <nav class="navbar">
             <ul>
                 <li>
-                    <a href="">Espaces de travail</a>
+                    <a class="nav-link" href="">Espaces de travail</a>
                 </li>
                 <li>
-                    <a href="">Récent</a>
+                    <a class="nav-link" href="">Récent</a>
                 </li>
                 <li>
-                    <a href="">Favoris</a>
+                    <a class="nav-link" href="">Favoris</a>
                 </li>
                 <li>
-                    <a href="">Modèles</a>
+                    <a class="nav-link" href="">Modèles</a>
                 </li>
                 <li>
-                    <a class="btn" href="">Créer</a>
+                    <a class="nav-link btn" href="">Créer</a>
                 </li>
             </ul>
         </nav>
