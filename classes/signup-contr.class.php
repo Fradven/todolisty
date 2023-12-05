@@ -2,17 +2,15 @@
 
 class SignupContr extends Signup
 {
-    private $uid;
     private $pwd;
     private $pwdrepeat;
     private $username;
 
-    public function __construct($uid, $pwd, $pwdrepeat, $username)
+    public function __construct($username, $pwd, $pwdrepeat)
     {
-        $this->uid = $uid;
+        $this->username = $username;
         $this->pwd = $pwd;
         $this->pwdrepeat = $pwdrepeat;
-        $this->username = $username;
     }
 
     public function signupUser()
@@ -23,9 +21,9 @@ class SignupContr extends Signup
             exit();
         }
 
-        if($this->invalidUid() == false)
+        if($this->invalidUsername() == false)
         {
-            header("location: ../index?error=invalidUid");
+            header("location: ../index?error=invalidUsername");
             exit();
         }
 
@@ -46,15 +44,15 @@ class SignupContr extends Signup
 
     private function emptyInput()
     {
-        if (empty($this->uid) || empty($this->pwd) || empty($this->pwdrepeat) || empty($this->username))
+        if (empty($this->pwd) || empty($this->pwdrepeat) || empty($this->username))
             return false;
         else
             return true;
     }
 
-    private function invalidUid()
+    private function invalidUsername()
     {
-        if (!preg_match("/^[a-zA-Z0-9]*$/", $this->uid))
+        if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username))
             return false;
         else
             return true;
@@ -70,7 +68,7 @@ class SignupContr extends Signup
 
     private function checkUsernameTaken()
     {
-        if (!$this->checkUser($this->uid, $this->username))
+        if (!$this->checkUser($this->username))
             return false;
         else
             return true;
