@@ -19,15 +19,15 @@ if (isset($_POST["submit"])) {
             $_SESSION['userId'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             // Redirection vers dashboard.php
-            header("location: ./components/dashboard.php");
+            header("location: ../components/dashboard.php");
             exit();
         } else {
             // Gestion d'erreur
-            header("location: ./index.php?error=wrongpassword");
+            header("location: ../index.php?error=wrongpassword");
             exit();
         }
     } else {
-        header("location: ./index.php?error=nouser");
+        header("location: ../index.php?error=nouser");
         exit();
     }
 }

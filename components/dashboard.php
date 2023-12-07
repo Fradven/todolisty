@@ -49,7 +49,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="../js/script.js"></script>
     <main id="main-content">
         <?php include '../includes/sidebar.php'; ?>
-        <link rel="stylesheet" href="/deux/styles/dashboard.css">
+        <link rel="stylesheet" href="/todolisty/styles/dashboard.css">
 
 
 
