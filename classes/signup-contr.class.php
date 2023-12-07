@@ -1,30 +1,74 @@
 <?php
 
-class SignupContr {
-    private $uid;
+class SignupContr extends Signup
+{
     private $pwd;
     private $pwdrepeat;
-    private $email;
+    private $username;
 
-    public function __construct($uid, $pwd, $pwdrepeat, $email)
+    public function __construct($username, $pwd, $pwdrepeat)
     {
-        $this->uid = $uid;
+        $this->username = $username;
         $this->pwd = $pwd;
         $this->pwdrepeat = $pwdrepeat;
-        $this->email = $email;
+    }
+
+    public function signupUser()
+    {
+        if($this->emptyInput() == false)
+        {
+            header("location: ../index?error=emptyinput");
+            exit();
+        }
+
+        if($this->invalidUsername() == false)
+        {
+            header("location: ../index?error=invalidUsername");
+            exit();
+        }
+
+        if($this->pwdMatch() == false)
+        {
+            header("location: ../index?error=pwdMatch");
+            exit();
+        }
+
+        if($this->checkUsernameTaken() == false)
+        {
+            header("location: ../index?error=checkUsernameTaken");
+            exit();
+        }
+
+        $this->setUser($this->username, $this->pwd);
     }
 
     private function emptyInput()
     {
-        if(empty($this->uid) || empty($this->pwd) || empty($this->pwdrepeat) || empty($this->email))
+        if (empty($this->pwd) || empty($this->pwdrepeat) || empty($this->username))
             return false;
         else
             return true;
     }
 
-    private function invalidUid()
+    private function invalidUsername()
     {
-        if(!preg_match("/^[a-zA-Z0-9]*$/", $this->uid))
+        if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username))
+            return false;
+        else
+            return true;
+    }
+
+    private function pwdMatch()
+    {
+        if ($this->pwd !== $this->pwdrepeat)
+            return false;
+        else
+            return true;
+    }
+
+    private function checkUsernameTaken()
+    {
+        if (!$this->checkUser($this->username))
             return false;
         else
             return true;
