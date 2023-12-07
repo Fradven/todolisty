@@ -37,7 +37,8 @@ body {
     font-weight: var(--font-weight);
     line-height: var(--line-height);
     color: var(--main-color);
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+    background-image: url(../assets/images/bg.jpg);
     height: 100vh;
 }
 
@@ -85,12 +86,14 @@ form .form-container {
     flex-direction: column;
 }
 
+form .form-container input:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
 form label {
-    background-color: var(--background-color);
     color: var(--button-primary-color);
     padding: 0.3rem;
-    margin-left: 1rem;
-    transform: translateY(1.2rem);
+    margin-left: 0.5rem;
     width: fit-content;
 }
 
@@ -137,6 +140,7 @@ header {
     padding: 1rem 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background-color: var(--background-color);
     border-bottom: 1px solid var(--border-color-container);
 }
 
@@ -306,7 +310,7 @@ nav a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 26rem;
+    width: 26rem;
     border-right: 1px solid var(--border-color-container);
     background-color: var(--background-color-sidebar);
 }
@@ -425,7 +429,7 @@ nav a {
 
 #content {
     padding: 3rem;
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
 }
 
 /* LOGIN & REGISTER  */
@@ -433,8 +437,8 @@ nav a {
 #login-signup-card {
     margin: 5rem auto auto;
     max-width: 40rem;
-    background-color: var(--background-color);
-    padding: 3rem 2rem 0rem;
+    background-color: var(--background-color-sidebar);
+    padding: 3rem 2rem 2rem;
     color: var(--main-color);
     border-radius: 15px;
 }
