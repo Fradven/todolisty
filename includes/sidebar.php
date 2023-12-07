@@ -12,22 +12,22 @@
     <ul class="sidebar-nav">
         <li class="sidebar-link">
             <a class="link" href="#">
-                <img class="sidebar-nav-icon" src="/todolisty/assets/images/board.png" alt="">
+                <img class="sidebar-nav-icon" src="./assets/images/board.png" alt="">
                 <span>Tableaux</span>
             </a>
         </li>
         <li class="sidebar-link">
             <a class="link" href="./members.php">
-                <img class="sidebar-nav-icon" src="/todolisty/assets/images/user.png" alt="">
+                <img class="sidebar-nav-icon" src="./assets/images/user.png" alt="">
                 <span class="link">Membres</span>
-                <img class="icon-plus" src="/todolisty/assets/images/plus.png" alt="">
+                <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </a>
         </li>
         <li class="sidebar-link">
             <a class="link" href="#">
-                <img class="sidebar-nav-icon" src="/todolisty/assets/images/settings.png" alt="">
+                <img class="sidebar-nav-icon" src="./assets/images/settings.png" alt="">
                 <span>Paramètres d'espace de travail</span>
-                <img class="icon-carret-down" src="/todolisty/assets/images/carret-down.png" alt="">
+                <img class="icon-carret-down" src="./assets/images/carret-down.png" alt="">
             </a>
         </li>
         <li>
@@ -37,13 +37,13 @@
             </div>
             <div class="sidebar-link">
                 <a class="link" href="#">
-                    <img class="sidebar-nav-icon" src="/todolisty/assets/images/tableur.png" alt="">
+                    <img class="sidebar-nav-icon" src="./assets/images/tableur.png" alt="">
                     <span>Tableur</span>
                 </a>
             </div>
             <div class="sidebar-link">
                 <a class="link" href="#">
-                    <img class="sidebar-nav-icon" src="/todolisty/assets/images/calendar.png" alt="">
+                    <img class="sidebar-nav-icon" src="./assets/images/calendar.png" alt="">
                     <span>Calendrier</span>
                 </a>
             </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="sidebar-link">
                 <a class="link" href="#">
-                    <img class="sidebar-nav-icon" src="/todolisty/assets/images/" alt="">
+                    <img class="sidebar-nav-icon" src="./assets/images/" alt="">
                     <span>Tâches</span>
                 </a>
             </div>

@@ -1,11 +1,11 @@
 <?php
 
 class Dbh {
-    public function connect() {
+    protected function connect() {
         try {
             $username = "root";
             $password = "";
-            $dbh = new PDO("mysql:host=localhost;dbname=deux", $username, $password);
+            $dbh = new PDO("mysql:host=localhost;dbname=todolisty", $username, $password);
 
             return $dbh;
         }

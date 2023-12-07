@@ -1,30 +1,80 @@
+<?php 
+$title = "Todolisty | Empower Your Day"; 
+$bodyClass = "home-page";
+?>
 <?php include './includes/header.php'; ?>
-<main id="main-content">
-    <?php include './includes/sidebar.php'; ?>
-    <div id="content">
-        <section>
-            <div>
-                <h2>Login</h2>
-                <form action="./includes/login.inc.php" method="post">
-                    <input type="text" name="uid" placeholder="Username">
-                    <input type="password" name="pwd" placeholder="Password">
-                    <button type="submit">LOGIN</button>
+    <!-- Créer condition pour afficher soit login sans sidebar soit page sans login -->
+    <!-- <div class="login-signup-container">
+        <div class="top-content">
+            <h1 class="page-title">Todolisty.</h1>
+            <h3 class="page-subtitle">Empower your day</h3>
+        </div>
+        <div id="login-signup-card">
+            <div class="tabs">
+                <button id="tab1" onclick="toggleTab('tab1','login-form')" class="tab tab-active">Login</button>
+                <button id="tab2" onclick="toggleTab('tab2','signup-form')" class="tab">Signup</button>
+            </div>
+            <div class="login-signup-forms">
+                <form id="login-form" class="tab-content tab-active" action="./includes/login.inc.php" method="post">
+                    <div class="form-container">
+                        <label for="l-uid">username</label>
+                        <input type="text" name="l-uid" required>
+                        <label for="l-pwd">password</label>
+                        <input type="password" name="l-pwd" required>
+                        <div class="form-actions">
+                            <button class="btn btn-outline" type="reset">Reset</button>
+                            <button class="btn" type="submit">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <form id="signup-form" class="tab-content" action="./includes/signup.inc.php" method="post">
+                    <div class="form-container">
+                        <label for="r-email">email</label>
+                        <input type="email" name="r-email"required>
+                        <label for="r-uid">username</label>
+                        <input type="text" name="r-uid" required>
+                        <label for="r-pwd">password</label>
+                        <input type="password" name="r-pwd" required>
+                        <label for="r-pwdrepeat">repeat password</label>
+                        <input type="password" name="r-pwdrepeat" required>
+                        <div class="form-actions">
+                            <button class="btn btn-outline" type="reset">Reset</button>
+                            <button class="btn" type="submit">Sign up</button>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <div>
-                <h2>Sign up</h2>
-                <form action="./includes/signup.inc.php" method="post">
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="text" name="uid" placeholder="Username">
-                    <input type="password" name="pwd" placeholder="Password">
-                    <input type="password" name="pwdrepeat" placeholder="Repeat Password">
-                    <button type="submit">SIGN UP</button>
-                </form>
+            <div class="form-links">
+                <a class="link" href="#">Help</a>
+                <a class="link" href="#">Privacy</a>
+                <a class="link" href="#">Terms</a>
             </div>
-        </section>
-    </div>
+            <script>
+                function toggleTab(tabId, tabContentId) {
+                    const tabs = document.querySelectorAll('.tab');
+                    const tabContent = document.querySelectorAll('.tab-content');
+    
+                    tabContent.forEach(content => {
+                    content.classList.remove('tab-active');
+                    });
+                    
+                    tabs.forEach(tab => {
+                    tab.classList.remove('tab-active');
+                    });
+    
+                    const selectedTabContent = document.getElementById(tabContentId);
+                    const selectedTab = document.getElementById(tabId);
+                    selectedTabContent.classList.add('tab-active');
+                    selectedTab.classList.add('tab-active');
+                }
+            </script>
+        </div>
+    </div> -->
+    <main id="main-content">
+        <?php include './includes/sidebar.php'; ?>
+        <div id="content">
+            <!-- placer todolist ici  -->
+        </div>    
     </main>
 </body>
-
-
 </html>
