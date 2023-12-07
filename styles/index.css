@@ -434,7 +434,7 @@ nav a {
     margin: 5rem auto auto;
     max-width: 40rem;
     background-color: var(--background-color);
-    padding: 3rem 2rem 0rem;
+    padding: 3rem 2rem 2rem;
     color: var(--main-color);
     border-radius: 15px;
 }
