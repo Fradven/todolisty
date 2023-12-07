@@ -6,7 +6,7 @@
             <p>Premium</p>
         </div>
         <div class="workspace-icon">
-            <img class="carret-left" src="./assets/images/carret-left.svg" alt="">
+            <img class="carret-left" src="/todolisty/assets/images/carret-left.svg" alt="">
         </div>
     </div>
     <ul class="sidebar-nav">
@@ -33,7 +33,7 @@
         <li>
             <div class="sidebar-link sidebar-subsection">
                 <p>Vues de l'espace de travail</p>
-                <img class="icon-plus" src="./assets/images/plus.png" alt="">
+                <img class="icon-plus" src="/todolisty/assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
                 <a class="link" href="#">
@@ -51,7 +51,7 @@
         <li>
             <div class="sidebar-link sidebar-subsection">
                 <p>Vos tableaux</p>
-                <img class="icon-plus" src="./assets/images/plus.png" alt="">
+                <img class="icon-plus" src="/todolisty/assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
                 <a class="link" href="#">
@@ -62,7 +62,7 @@
         </li>
     </ul>
     <div class="trial-infos">
-        <img class="sidebar-nav-icon" src="./assets/images/entreprise.png" alt="">
+        <img class="sidebar-nav-icon" src="/todolisty/assets/images/entreprise.png" alt="">
         <p>7 jours restants pour votre essai gratuit de Premium.
             <a class="link" href="">Accéder à la page de facturation</a>
         </p> 
