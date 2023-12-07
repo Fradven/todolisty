@@ -1,12 +1,12 @@
  # registration
-- pour avoir accès à l'utilisaton de l'applicaton, afficher deux options, l'option "S'inscrire" et l'option "Se connecter"
+- pour avoir accès à l'utilisation de l'applicaton, afficher deux options, l'option "S'inscrire" et l'option "Se connecter"
 
 - pour les deux options "Se connecter"/"S'inscire", l'utilsateur doit fournir son identifiant et un mot de passe afin d'y avoir accès à un compte
 
 
  # interface principale 
 
-- une fois connecté, l'utilisateur sera dirigé vers des tableaux de bord principal, il pourra créer des tableaux ou se diriger dans des tableaux existants.
+- une fois connecté, l'utilisateur sera dirigé vers des tableaux de bord principal, il pourra créer des tableaux ou se diriger dans des tableaux existants
 
   # todolisty
 
@@ -16,7 +16,7 @@ Tableau Trello : [https://trello.com/b/tl2umUYC](https://trello.com/b/tl2umUYC/t
 
    ## header 
 
-- en haut à gauche prevoir le logo qui idenfie l'application "Trello" et prevoir une îcone
+- en haut à gauche prevoir le logo qui identifie l'application "Trello" et prevoir une îcone représentative de l'application
   
 
    ## barre latérale gauche 
@@ -40,7 +40,7 @@ dans le "Tableaux Personnels", l'utilisateur aura une liste de ses tableaux pers
   
 - dans chaque colonne, des tâches individuelles qui sont représentées dans des cartes. Les cartes sont à l'intérieur des listes
 
-- chaque carte est fonctionnelle, c'est à dire que cette fonctionnalité permet à l'utilisateur de passer rapidement entre les tableaux. Et donc déplacer les cartes dans les différentes tableaux
+- chaque carte est fonctionnelle, c'est à dire que cette fonctionnalité permet à l'utilisateur de passer rapidement entre les tableaux. Et donc déplacer les cartes dans les différentes colonnes
 
 - dans la carte, en haut à droite, prévoir une îcone qui permet à l'utilisateur de modifier l'élèment dans la carte. l'utilisateur peut modifier l'élèment, ajouter et/ou modifier les membres , le déplacer, le copier et modifier les dates ainsi l'enregistrer
 
@@ -54,7 +54,7 @@ dans le "Tableaux Personnels", l'utilisateur aura une liste de ses tableaux pers
 
   - dans la carte , prévoir un "attachements" / "Pièces jointes" , cela va permettre à l'utilisateur de joindre des fichiers, des images, des liens ou d'autres documents pertinents à la carte
 
-- dans la carte, prévoir un espace pour emettre un commentaire. Cela permet à l'utilisateur de discuter avec les membres de l'équipe
+- dans la carte, prévoir un espace pour emettre des commentaires. Cela permet à l'utilisateur de discuter avec les membres de l'équipe
 
 - dans la carte, prévoir une fonctionnalité "membres assignés", cela permet à l'utilisateur d'assigner des membres de l'équipe ou collaborateurs à des tâches spécifiques
 
@@ -62,7 +62,7 @@ dans le "Tableaux Personnels", l'utilisateur aura une liste de ses tableaux pers
 
 - dans la navbvar, prévoir différentes zones comme "Espace de travail" , "Récent", "Favoris", "Modèles"
 
-- dans la navabar, prévoir un bouton "créer". Cela facilite la création de nouveaux tableaux, équipes ou organisations 
+- dans la navbar, prévoir un bouton "créer". Cela facilite la création de nouveaux tableaux, équipes ou organisations 
 
 - dans la navbar, prévoir un espace pour une barre de recherche. Cela facilitera à l'utilisateur, la recherche de tableaux, des cartes des membres
 
