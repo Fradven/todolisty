@@ -17,16 +17,16 @@ if (isset($_GET['task_id'])) {
     // On essaie d'exécuter la requête
     if ($stmt->execute([$taskId])) {
         // Si ça marche, on redirige l'utilisateur vers le dashboard avec un message de succès
-        header("Location: ../components/dashboard.php?success=taskdeleted");
+        header("Location: ../dashboard.php?success=taskdeleted");
         exit(); 
     } else {
         // Si ça ne marche pas, on redirige vers le dashboard avec un message d'erreur
-        header("Location: ../components/dashboard.php?error=deletionfailed");
+        header("Location: ../dashboard.php?error=deletionfailed");
         exit(); 
     }
 } else {
     // Si on n'a pas l'identifiant de la tâche, on redirige simplement vers le tableau de bord
-    header("Location: ../components/dashboard.php");
+    header("Location: ../dashboard.php");
     exit(); 
 }
 ?>

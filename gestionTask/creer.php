@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     // On vérifie si le titre ou le statut sont vides, parce qu'on ne veut pas de tâche sans nom ni statut.
     if (empty($title) || empty($status_id)) {
         // Si c'est le cas, on renvoie l'utilisateur sur le tableau de bord avec un petit message d'erreur.
-        header('Location: ../components/dashboard.php?error=emptyfields');
+        header('Location: ../dashboard.php?error=emptyfields');
         exit(); 
     }
 
@@ -26,16 +26,16 @@ if (isset($_POST['submit'])) {
     // On exécute la requête avec les infos du formulaire et l'ID de l'utilisateur connecté.
     if (!$stmt->execute([$title, $body, $status_id, $_SESSION['userId'], $_SESSION['userId']])) {
         // Si ça ne marche pas, on renvoie encore une fois vers le tableau de bord avec un message d'erreur.
-        header('Location: ../components/dashboard.php?error=sqlerror');
+        header('Location: ../dashboard.php?error=sqlerror');
         exit(); 
     }
 
     // Si tout s'est bien passé, on renvoie l'utilisateur vers le tableau de bord avec un message de succès.
-    header('Location: ../components/dashboard.php?success=taskadded');
+    header('Location: ../dashboard.php?success=taskadded');
     exit(); 
 } else {
     // Si l'utilisateur arrive ici sans avoir soumis le formulaire, on le renvoie simplement sur le dashboard
-    header('Location: ../components/dashboard.php');
+    header('Location: ../dashboard.php');
     exit(); 
 }
 ?>

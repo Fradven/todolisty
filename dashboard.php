@@ -1,7 +1,7 @@
 <?php
 // Démarrage de la session 
 session_start();
-include '../classes/dbh.class.php';
+include './classes/dbh.class.php';
 
 // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
 if (!isset($_SESSION['userId'])) {
@@ -45,18 +45,19 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 
-    <?php include '../includes/header.php'; ?>
-    <script src="../js/script.js"></script>
+    <?php include './includes/header.php'; ?>
+    <script src="./js/script.js"></script>
     <main id="main-content">
-        <?php include '../includes/sidebar.php'; ?>
-        <link rel="stylesheet" href="/todolisty/styles/dashboard.css">
+        <?php include './includes/sidebar.php'; ?>
+        <link rel="stylesheet" href="./styles/dashboard.css">
 
 
 
 
         <div id='content'>
+        <h1>Votre Dashboard</h1>
             <div class="dashboard-container">
-                <h1>Votre Dashboard</h1>
+                
                 <div class="task-columns">
                     <!-- Différentes colonnes pour les statuts des tâches : "À Faire", "En Cours", "Terminé" -->
 
@@ -77,7 +78,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                         <!-- Bouton pour ajouter une nouvelle tâche -->
                         <button onclick="openPopup(1)">Ajouter Tâche</button> <!-- Pour "À Faire" -->
-                        <form id="form-todo" action="../gestionTask/creer.php" method="post" style="display:none;">
+                        <form id="form-todo" action="./gestionTask/creer.php" method="post" style="display:none;">
                             <input type="text" name="title" placeholder="Titre" required>
                             <textarea name="body" placeholder="Description"></textarea>
                             <input type="hidden" name="status_id" value="1">
@@ -103,7 +104,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php endforeach; ?>
                     <!-- Bouton pour ajouter une nouvelle tâche -->
                     <button onclick="openPopup(2)">Ajouter Tâche</button> <!-- Pour "En Cours" -->
-                    <form id="form-in-progress" action="../gestionTask/creer.php" method="post" style="display:none;">
+                    <form id="form-in-progress" action="./gestionTask/creer.php" method="post" style="display:none;">
                         <input type="text" name="title" placeholder="Titre" required>
                         <textarea name="body" placeholder="Description"></textarea>
                         <input type="hidden" name="status_id" value="2">
@@ -130,7 +131,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php endforeach; ?>
                     <!-- Bouton pour ajouter une nouvelle tâche -->
                     <button onclick="openPopup(3)">Ajouter Tâche</button> <!-- Pour "Terminé" -->
-                    <form id="form-done" action="../gestionTask/creer.php" method="post" style="display:none;">
+                    <form id="form-done" action="./gestionTask/creer.php" method="post" style="display:none;">
                         <input type="text" name="title" placeholder="Titre" required>
                         <textarea name="body" placeholder="Description"></textarea>
                         <input type="hidden" name="status_id" value="3">
@@ -154,7 +155,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
     <div id="task-popup" class="task-popup">
         <div class="task-popup-content">
             <span class="close-btn" onclick="closePopup()">&times;</span>
-            <form action="../gestionTask/creer.php" method="post">
+            <form action="./gestionTask/creer.php" method="post">
                 <h2>Ajouter une Nouvelle Tâche</h2>
                 <input type="text" name="title" placeholder="Titre" required>
                 <textarea name="body" placeholder="Description"></textarea>
@@ -173,7 +174,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="task-popup-content">
             <span class="close-btn" onclick="closeEditPopup()">&times;</span>
             <h2>Modifier la Tâche</h2>
-            <form id="edit-task-form" action="../gestionTask/modifier.php" method="post">
+            <form id="edit-task-form" action="./gestionTask/modifier.php" method="post">
                 <input type="hidden" name="task_id" id="edit-task-id">
                 <div class="form-group">
                     <label for="edit-task-title">Titre de la Tâche</label>

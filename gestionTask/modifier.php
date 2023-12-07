@@ -21,16 +21,16 @@ if (isset($_POST['submit'])) {
     // On exécute la requête avec les nouvelles infos
     if ($stmt->execute([$title, $body, $taskId])) {
         // Si la mise à jour réussit, on redirige l'utilisateur vers dashboard avec un message de succès
-        header("Location: ../components/dashboard.php?success=taskupdated");
+        header("Location: ../dashboard.php?success=taskupdated");
         exit(); 
     } else {
         // Si quelque chose ne va pas, on redirige vers le dashboard avec un message d'erreur
-        header("Location: ../components/dashboard.php?error=updatefailed");
+        header("Location: ../dashboard.php?error=updatefailed");
         exit(); // On termine aussi le script ici.
     }
 } else {
     // Si l'utilisateur arrive sur ce script sans passer par le formulaire, on le renvoie vers le dashboard
-    header("Location: ../components/dashboard.php");
+    header("Location: ../dashboard.php");
     exit(); 
 }
 ?>
