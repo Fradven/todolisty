@@ -12,7 +12,7 @@
 
 Tableau Trello : [https://trello.com/b/tl2umUYC](https://trello.com/b/tl2umUYC/t%C3%A2ches)
 
-- prévoir un bouton "Se deconnecter afin de permettre à l'utilisateur quitter l'application
+- prévoir un bouton "Se deconnecter" afin de permettre à l'utilisateur quitter l'application
 
    ## header 
 
