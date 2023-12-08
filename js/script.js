@@ -39,7 +39,7 @@ function editTask() {
 function deleteTask() {
     // Supprimez la tâche actuelle
     if (confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) {
-        window.location.href = "../gestionTask/supprimer.php?task_id=" + window.currentTaskId;
+        window.location.href = "./gestionTask/supprimer.php?task_id=" + window.currentTaskId;
     }
 }
 
@@ -103,7 +103,7 @@ function assignTaskToUser(taskId) {
     formData.append('assignee_id', assigneeId);
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../gestionTask/assignTask.php', true);
+    xhr.open('POST', './gestionTask/assignTask.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function() {
@@ -156,7 +156,7 @@ function updateTaskList() {
 
 function moveTask(taskId, direction) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../gestionTask/moveTask.php', true);
+    xhr.open('POST', './gestionTask/moveTask.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function() {
