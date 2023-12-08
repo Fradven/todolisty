@@ -12,9 +12,11 @@ function openDetailsPopup(taskId) {
     var task = document.getElementById('task-' + taskId);
     var title = task.querySelector('.task-title').innerText;
     var body = task.querySelector('.task-body').innerText;
+    var priority = task.querySelector('.task-priority').innerText;
 
     document.getElementById('popup-title').innerText = title;
     document.getElementById('popup-body').innerText = body;
+    document.getElementById('priority-value').innerText = priority;
 
     // Stockez l'ID de la tâche pour les opérations de modification et de suppression
     window.currentTaskId = taskId;
