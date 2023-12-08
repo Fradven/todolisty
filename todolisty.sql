@@ -52,3 +52,19 @@ INSERT INTO status (label) VALUES ('terminé');
 INSERT INTO priority (label) VALUES ('bas');
 INSERT INTO priority (label) VALUES ('moyen');
 INSERT INTO priority (label) VALUES ('élevé');
+
+INSERT INTO todolisty.users
+(id, username, password, created_at, deleted_at, role_id)
+VALUES(5, 'adam', '$2y$10$8kOt/v35OJC91gT2RnmZN.Lv4e9RU0YODxqt1EZSIJMi97DQIcfde', '2023-12-08 23:35:19', NULL, 1);
+INSERT INTO todolisty.users
+(id, username, password, created_at, deleted_at, role_id)
+VALUES(6, 'henry', '$2y$10$jNQsfg0nBOUuL8ov6adow.twZY31uVpfpQxsUrd4VG2B8nHcCTcpK', '2023-12-08 23:41:36', NULL, 2);
+INSERT INTO todolisty.users
+(id, username, password, created_at, deleted_at, role_id)
+VALUES(7, 'Julia', '$2y$10$Ihtuy9ta5j95Q.OPuEDgnOrycw.dbqcm6BzrGATonCBhYrkqEeKJ2', '2023-12-08 23:44:58', NULL, 2);
+INSERT INTO todolisty.users
+(id, username, password, created_at, deleted_at, role_id)
+VALUES(8, 'Lucia', '$2y$10$PUlNKQIJFM3lPzIGeKvhOe/cFa3KK/.HsMztRVqSRRV2hYzmoEc1i', '2023-12-08 23:47:40', NULL, 2);
+INSERT INTO todolisty.users
+(id, username, password, created_at, deleted_at, role_id)
+VALUES(9, 'Edward', '$2y$10$aVM33Jyc7ur/MiRtlPhSUOJRW0RZRgFyICG7d5udwnsKCSpu2qtXO', '2023-12-08 23:48:08', NULL, 2);
