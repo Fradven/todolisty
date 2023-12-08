@@ -42,7 +42,7 @@ if (!isset($_SESSION["usernameid"])) {
                         <input type="password" name="pwdrepeat" required>
                         <div class="form-actions">
                             <button class="btn btn-outline" type="reset">Reset</button>
-                            <button class="btn" type="submit" name="submit">>Sign up</button>
+                            <button class="btn" type="submit" name="submit">Sign up</button>
                         </div>
                     </div>
                 </form>

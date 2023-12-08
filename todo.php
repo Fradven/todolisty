@@ -152,18 +152,17 @@ foreach ($tasks as $task) {
     <div id="task-popup" class="task-popup">
         <div class="task-popup-content">
             <span class="close-btn" onclick="closePopup()">&times;</span>
-            <form action="./gestionTask/creer.php" method="post">
-                <h2>Ajouter une Nouvelle Tâche</h2>
+            <form class="add-task-form" action="./gestionTask/creer.php" method="post">
+                <h3>Ajouter une Nouvelle Tâche</h3>
                 <input class="edit-input" type="text" name="title" placeholder="Titre" required>
                 <textarea class="edit-input" name="body" placeholder="Description"></textarea>
                 <select class="edit-input task-priority" name="priority_id" required>
-                    <option value="0">Choisir une priorité</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
                     <option value="3">Élevé</option>
                 </select>
                 <input type="hidden" name="status_id" id="popup-status-id">
-                <button class="todo-icon" type="submit" name="submit">
+                <button class="todo-btn" type="submit" name="submit">
                     <img class="todo-icon check-icon" src="./assets/images/check.png" alt="">
                 </button>
             </form>
@@ -186,7 +185,6 @@ foreach ($tasks as $task) {
                     <textarea class="edit-input" name="body" id="edit-task-body" placeholder="Description"></textarea>
                 </div>
                 <select class="edit-input task-priority" name="priority_id" required>
-                    <option value="0">Choisir une priorité</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
                     <option value="3">Élevé</option>

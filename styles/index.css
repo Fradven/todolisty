@@ -640,6 +640,7 @@ body.members-page #content {
 /* Styles de base pour le dashboard */
 .todo-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     padding: 3rem;
 }
@@ -838,6 +839,17 @@ body.members-page #content {
     align-self: flex-end;
 }
 
+.add-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.add-task-form .todo-btn {
+    align-self: flex-end;
+}
+
 /* MEMBERS PAGE  */
 
 .workspace.private,
@@ -1007,10 +1019,13 @@ select.members-input {
     #sidebar {
         width: min-content;
     }
+    .navbar {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 850px) {
-    .navbar {
-        display: none;
+    .todo-container {
+        flex-direction: column;
     }
 }

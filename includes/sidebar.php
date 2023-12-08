@@ -27,11 +27,17 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
         </div>
     </div>
     <ul class="sidebar-nav">
-        <li class="sidebar-link">
-            <a class="link" href="#">
-                <img class="sidebar-nav-icon" src="./assets/images/board.png" alt="">
-                <span>Tableaux</span>
-            </a>
+        <li>
+            <div class="sidebar-link sidebar-subsection">
+                <p>Vos tableaux</p>
+                <img class="icon-plus" src="./assets/images/plus.png" alt="">
+            </div>
+            <div class="sidebar-link">
+                <a class="link <?= $class1 ?>" href="<?= $link1_url ?>">
+                    <img class="sidebar-nav-icon" src="./assets/images/bg-min.jpg" alt="">
+                    <span>Tâches</span>
+                </a>
+            </div>
         </li>
         <li class="sidebar-link">
             <a class="link <?= $class2 ?>" href="<?= $link2_url ?>">
@@ -62,18 +68,6 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
                 <a class="link" href="#">
                     <img class="sidebar-nav-icon" src="./assets/images/calendar.png" alt="">
                     <span>Calendrier</span>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div class="sidebar-link sidebar-subsection">
-                <p>Vos tableaux</p>
-                <img class="icon-plus" src="./assets/images/plus.png" alt="">
-            </div>
-            <div class="sidebar-link">
-                <a class="link <?= $class1 ?>" href="<?= $link1_url ?>">
-                    <img class="sidebar-nav-icon" src="./assets/images/bg-min.jpg" alt="">
-                    <span>Tâches</span>
                 </a>
             </div>
         </li>
