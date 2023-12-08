@@ -53,6 +53,9 @@ INSERT INTO priority (label) VALUES ('bas');
 INSERT INTO priority (label) VALUES ('moyen');
 INSERT INTO priority (label) VALUES ('élevé');
 
+INSERT INTO role (label) VALUES ('Admin');
+INSERT INTO role (label) VALUES ('User');
+
 INSERT INTO todolisty.users
 (id, username, password, created_at, deleted_at, role_id)
 VALUES(5, 'adam', '$2y$10$8kOt/v35OJC91gT2RnmZN.Lv4e9RU0YODxqt1EZSIJMi97DQIcfde', '2023-12-08 23:35:19', NULL, 1);
