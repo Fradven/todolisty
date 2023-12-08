@@ -33,10 +33,13 @@ $countTasksStmt->execute();
 $totalTasks = $countTasksStmt->fetchColumn();
 
 // Déterminez le texte à afficher dans le cercle.
-$circleText = 'N/A'; // Texte par défaut si aucun utilisateur n'est assigné
-if (!empty($tasks['username'])) {
-    // Si un utilisateur est assigné, utilisez seulement la première lettre en majuscule.
-    $circleText = strtoupper(substr($task['username'], 0, 1));
+$circleText = 'A'; // Texte par défaut si aucun utilisateur n'est assigné
+foreach ($tasks as $task) {
+    if (!empty($task['username'])) {
+        // Si un utilisateur est assigné, utilisez seulement la première lettre en majuscule.
+        $circleText = strtoupper(substr($task['username'], 0, 1));
+        break; // Exit the loop once an assigned user is found
+    }
 }
 ?>
 
@@ -56,6 +59,9 @@ if (!empty($tasks['username'])) {
                         <p class="task-body todo-body" style="display:none;">
                             <?= htmlspecialchars($task['body']) ?>
                         </p>
+                        <span class="task-priority">
+                            <?= htmlspecialchars($task['priority_label']) ?>
+                        </span>
                         <div class="member-icon"><?= htmlspecialchars($circleText) ?></div>
                     </button>
                 <?php endforeach; ?>
@@ -86,6 +92,9 @@ if (!empty($tasks['username'])) {
                         <p class="task-body todo-body" style="display:none;">
                             <?= htmlspecialchars($task['body']) ?>
                         </p>
+                        <span class="task-priority">
+                            <?= htmlspecialchars($task['priority_label']) ?>
+                        </span>
                         <div class="member-icon"><?= htmlspecialchars($circleText) ?></div>
                     </button>
                 <?php endforeach; ?>
@@ -117,6 +126,9 @@ if (!empty($tasks['username'])) {
                         <p class="task-body todo-body" style="display:none;">
                             <?= htmlspecialchars($task['body']) ?>
                         </p>
+                        <span class="task-priority">
+                            <?= htmlspecialchars($task['priority_label']) ?>
+                        </span>
                         <div class="member-icon"><?= htmlspecialchars($circleText) ?></div>
                     </button>
                 <?php endforeach; ?>
@@ -144,14 +156,14 @@ if (!empty($tasks['username'])) {
                 <h2>Ajouter une Nouvelle Tâche</h2>
                 <input class="edit-input" type="text" name="title" placeholder="Titre" required>
                 <textarea class="edit-input" name="body" placeholder="Description"></textarea>
-                <select class="edit-input" name="priority_id" required>
+                <select class="edit-input task-priority" name="priority_id" required>
                     <option value="0">Choisir une priorité</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
                     <option value="3">Élevé</option>
                 </select>
                 <input type="hidden" name="status_id" id="popup-status-id">
-                <button class="" type="submit" name="submit">
+                <button class="todo-icon" type="submit" name="submit">
                     <img class="todo-icon check-icon" src="./assets/images/check.png" alt="">
                 </button>
             </form>
@@ -173,7 +185,7 @@ if (!empty($tasks['username'])) {
                     <label for="edit-task-body">Description</label>
                     <textarea class="edit-input" name="body" id="edit-task-body" placeholder="Description"></textarea>
                 </div>
-                <select class="edit-input" name="priority_id" required>
+                <select class="edit-input task-priority" name="priority_id" required>
                     <option value="0">Choisir une priorité</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
@@ -192,6 +204,7 @@ if (!empty($tasks['username'])) {
             <span class="close-btn" onclick="closeDetailsPopup()">&times;</span>
             <h2 id="popup-title"></h2>
             <div id="popup-body"></div>
+            <p>Priorité : <span id="priority-value"></span></p>
             <div class="todo-actions">
                 <button class="todo-btn" onclick="moveTask(window.currentTaskId, 'left')">
                     <img class="todo-icon carret carret-left" src="./assets/images/carret-right.png" alt="">

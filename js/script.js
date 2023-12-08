@@ -9,10 +9,10 @@ function closePopup() {
 
 
 function openDetailsPopup(taskId) {
-    var task = document.getElementById('task-' + taskId);
-    var title = task.querySelector('.task-title').textContent;
-    var body = task.querySelector('.task-body').textContent;
-    var priority = task.querySelector('.task-priority').textContent;
+    let task = document.getElementById('task-' + taskId);
+    let title = task.querySelector('.task-title').textContent;
+    let body = task.querySelector('.task-body').textContent;
+    let priority = task.querySelector('.task-priority').textContent;
 
     document.getElementById('popup-title').textContent = title;
     document.getElementById('popup-body').textContent = body;
@@ -47,9 +47,9 @@ function deleteTask() {
 
 
 function openEditPopup(taskId) {
-    var task = document.getElementById('task-' + taskId);
-    var title = task.querySelector('.task-title').innerText;
-    var body = task.querySelector('.task-body').innerText;
+    let task = document.getElementById('task-' + taskId);
+    let title = task.querySelector('.task-title').innerText;
+    let body = task.querySelector('.task-body').innerText;
 
     document.getElementById('edit-task-id').value = taskId;
     document.getElementById('edit-task-title').value = title;
@@ -66,9 +66,9 @@ function closeEditPopup() {
 
 function prepareEditTask(taskId) {
     // Vous pouvez récupérer les détails de la tâche à partir de l'ID si nécessaire
-    var task = document.getElementById('task-' + taskId);
-    var title = task.querySelector('.task-title').innerText;
-    var body = task.querySelector('.task-body').innerText;
+    let task = document.getElementById('task-' + taskId);
+    let title = task.querySelector('.task-title').innerText;
+    let body = task.querySelector('.task-body').innerText;
 
     // Préparez le formulaire de modification
     document.getElementById('edit-task-id').value = taskId;
@@ -93,18 +93,18 @@ function closeEditPopup() {
 
 
 function assignTaskToUser(taskId) {
-    var assigneeId = document.getElementById('assign-user').value;
+    let assigneeId = document.getElementById('assign-user').value;
 
     if (!assigneeId) {
         alert("Veuillez sélectionner un utilisateur à qui assigner la tâche.");
         return;
     }
 
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append('task_id', taskId);
     formData.append('assignee_id', assigneeId);
 
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open('POST', './gestionTask/assignTask.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -127,13 +127,13 @@ function assignTaskToUser(taskId) {
 
 
 function updateTaskList() {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open('GET', '../gestionTask/getUserTasks.php', true); // Chemin vers le script PHP qui renvoie les tâches de l'utilisateur
 
     xhr.onload = function() {
         if (this.status == 200) {
-            var tasks = JSON.parse(this.responseText);
-            var taskListContainer = document.getElementById('task-list-container'); // L'élément contenant la liste des tâches
+            let tasks = JSON.parse(this.responseText);
+            let taskListContainer = document.getElementById('task-list-container'); // L'élément contenant la liste des tâches
             taskListContainer.innerHTML = ''; // Effacer les tâches actuelles
 
             tasks.forEach(function(task) {
@@ -157,7 +157,7 @@ function updateTaskList() {
 
 
 function moveTask(taskId, direction) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open('POST', './gestionTask/moveTask.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 

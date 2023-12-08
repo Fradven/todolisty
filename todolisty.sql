@@ -45,7 +45,10 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 INSERT INTO status (label) VALUES ('à faire');
 INSERT INTO status (label) VALUES ('en cours');
 INSERT INTO status (label) VALUES ('terminé');
+
+INSERT INTO priority (label) VALUES ('bas');
+INSERT INTO priority (label) VALUES ('moyen');
+INSERT INTO priority (label) VALUES ('élevé');
