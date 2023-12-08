@@ -1,21 +1,14 @@
 <?php
 // Démarrage de la session 
-session_start();
 include './classes/dbh.class.php';
-
-// Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
-if (!isset($_SESSION['userId'])) {
-    header("Location: index.php");
-    exit();
-}
 
 $dbh = new Dbh(); // Création d'un nouvel objet pour la connexion à la base de données
 $conn = $dbh->connect(); // Connexion à la base de données
 
-$userId = $_SESSION['userId']; // Récupération de l'ID de l'utilisateur connecté
+$userId = $_SESSION['usernameid']; // Récupération de l'ID de l'utilisateur connecté
 
 // Préparation et exécution de la requête SQL pour récupérer les tâches visibles par l'utilisateur
-$stmt = $conn->prepare("SELECT t.*, s.label as status_label FROM tasks t JOIN status s ON t.status_id = s.id WHERE visible_to_user_id = ?");
+$stmt = $conn->prepare("SELECT t.*, s.label as status_label FROM tasks t JOIN status s ON t.status_id = s.id WHERE assign_user_id = ?");
 $stmt->execute([$userId]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC); // Stockage des tâches dans une variable
 
@@ -31,8 +24,6 @@ $userListStmt->execute([$userId]);
 $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -40,39 +31,28 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-
-
-
-
-
-    <?php include './includes/header.php'; ?>
     <script src="./js/script.js"></script>
     <main id="main-content">
-        <?php include './includes/sidebar.php'; ?>
         <link rel="stylesheet" href="./styles/dashboard.css">
 
-
-
-
         <div id='content'>
-        <h1>Votre Dashboard</h1>
+            <h1>Votre Dashboard</h1>
             <div class="dashboard-container">
-                
+
                 <div class="task-columns">
                     <!-- Différentes colonnes pour les statuts des tâches : "À Faire", "En Cours", "Terminé" -->
-
-
-
-
-
                     <!-- Colonne "À Faire" -->
                     <div class="column" id="todo">
                         <h3>À Faire</h3>
                         <!-- Boucle pour afficher chaque tâche dans la colonne "À Faire" -->
-                        <?php foreach ($tasksByStatus['à faire'] as $task) : ?>
+                        <?php foreach ($tasksByStatus['à faire'] as $task): ?>
                             <div class='task' id="task-<?= $task['id'] ?>">
-                                <span class="task-title"><?= htmlspecialchars($task['title']) ?></span>
-                                <p class="task-body" style="display:none;"><?= htmlspecialchars($task['body']) ?></p>
+                                <span class="task-title">
+                                    <?= htmlspecialchars($task['title']) ?>
+                                </span>
+                                <p class="task-body" style="display:none;">
+                                    <?= htmlspecialchars($task['body']) ?>
+                                </p>
                                 <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
                             </div>
                         <?php endforeach; ?>
@@ -86,19 +66,18 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
-
-
-
-
-
                 <!-- Colonne "En Cours" -->
                 <div class="column" id="in-progress">
                     <h3>En Cours</h3>
                     <!-- Boucle pour afficher chaque tâche dans la colonne "En Cours" -->
-                    <?php foreach ($tasksByStatus['en cours'] as $task) : ?>
+                    <?php foreach ($tasksByStatus['en cours'] as $task): ?>
                         <div class='task' id="task-<?= $task['id'] ?>">
-                            <span class="task-title"><?= htmlspecialchars($task['title']) ?></span>
-                            <p class="task-body" style="display:none;"><?= htmlspecialchars($task['body']) ?></p>
+                            <span class="task-title">
+                                <?= htmlspecialchars($task['title']) ?>
+                            </span>
+                            <p class="task-body" style="display:none;">
+                                <?= htmlspecialchars($task['body']) ?>
+                            </p>
                             <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
                         </div>
                     <?php endforeach; ?>
@@ -111,21 +90,18 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                     </form>
                 </div>
 
-
-
-
-
-
-
-
                 <!-- Colonne "Terminé" -->
                 <div class="column" id="done">
                     <h3>Terminé</h3>
                     <!-- Boucle pour afficher chaque tâche dans la colonne "Terminé" -->
-                    <?php foreach ($tasksByStatus['terminé'] as $task) : ?>
+                    <?php foreach ($tasksByStatus['terminé'] as $task): ?>
                         <div class='task' id="task-<?= $task['id'] ?>">
-                            <span class="task-title"><?= htmlspecialchars($task['title']) ?></span>
-                            <p class="task-body" style="display:none;"><?= htmlspecialchars($task['body']) ?></p>
+                            <span class="task-title">
+                                <?= htmlspecialchars($task['title']) ?>
+                            </span>
+                            <p class="task-body" style="display:none;">
+                                <?= htmlspecialchars($task['body']) ?>
+                            </p>
                             <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
                         </div>
                     <?php endforeach; ?>
@@ -141,15 +117,6 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         </div>
     </main>
-
-
-
-
-
-
-
-
-
     <!-- Divers popups pour la gestion des tâches (ajout, modification, détails) -->
     <!-- Popup pour Ajouter une Tâche -->
     <div id="task-popup" class="task-popup">
@@ -164,10 +131,6 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
     </div>
-
-
-
-
 
     <!-- Popup pour modifier -->
     <div id="edit-task-popup" class="task-popup" style="display:none;">
@@ -189,10 +152,6 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-
-
-
-
     <!-- Popup pour détails -->
     <div id="details-popup" class="task-popup" style="display:none;">
         <div class="task-popup-content">
@@ -206,15 +165,15 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="assign-task">
                 <label for="assign-user">Assigner à :</label>
                 <select id="assign-user">
-                    <?php foreach ($userList as $user) : ?>
-                        <option value="<?= $user['id'] ?>"><?= htmlspecialchars($user['username']) ?></option>
+                    <?php foreach ($userList as $user): ?>
+                        <option value="<?= $user['id'] ?>">
+                            <?= htmlspecialchars($user['username']) ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
                 <button onclick="assignTaskToUser(window.currentTaskId)">Assigner</button>
             </div>
         </div>
-
-
     </div>
 </body>
 
