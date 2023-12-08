@@ -36,9 +36,6 @@
                 <li>
                     <a class="nav-link btn" href="">Créer</a>
                 </li>
-                <li>
-                    <a class="nav-link btn" href="./includes/logout.inc.php">Logout</a>
-                </li>
             </ul>
         </nav>
         <div class="menu-tools">
@@ -61,6 +58,11 @@
                     <button class="account-btn">
                         <img class="account-icon" src="./assets/images/account.png" alt="">
                     </button>
+                </li>
+                <li>
+                    <a class="btn logout-btn" href="./includes/logout.inc.php">
+                        <img class="logout-icon" src="./assets/images/logout.png" alt="">
+                    </a>
                 </li>
             </ul>
         </div>

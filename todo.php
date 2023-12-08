@@ -22,101 +22,115 @@ foreach ($tasks as $task) {
 $userListStmt = $conn->prepare("SELECT id, username FROM users WHERE id != ?");
 $userListStmt->execute([$userId]);
 $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Compte le nombre total de tâches dans la base de données
+$countTasksStmt = $conn->prepare("SELECT COUNT(*) FROM tasks");
+$countTasksStmt->execute();
+$totalTasks = $countTasksStmt->fetchColumn();
+
+// Déterminez le texte à afficher dans le cercle.
+$circleText = 'N/A'; // Texte par défaut si aucun utilisateur n'est assigné
+if (!empty($tasks['username'])) {
+    // Si un utilisateur est assigné, utilisez seulement la première lettre en majuscule.
+    $circleText = strtoupper(substr($task['username'], 0, 1));
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-</head>
-
-<body>
-    <script src="./js/script.js"></script>
-    <main id="main-content">
-        <link rel="stylesheet" href="./styles/dashboard.css">
-
-        <div id='content'>
-            <h1>Votre Dashboard</h1>
-            <div class="dashboard-container">
-
-                <div class="task-columns">
-                    <!-- Différentes colonnes pour les statuts des tâches : "À Faire", "En Cours", "Terminé" -->
-                    <!-- Colonne "À Faire" -->
-                    <div class="column" id="todo">
-                        <h3>À Faire</h3>
-                        <!-- Boucle pour afficher chaque tâche dans la colonne "À Faire" -->
-                        <?php foreach ($tasksByStatus['à faire'] as $task): ?>
-                            <div class='task' id="task-<?= $task['id'] ?>">
-                                <span class="task-title">
-                                    <?= htmlspecialchars($task['title']) ?>
-                                </span>
-                                <p class="task-body" style="display:none;">
-                                    <?= htmlspecialchars($task['body']) ?>
-                                </p>
-                                <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
-                            </div>
-                        <?php endforeach; ?>
-                        <!-- Bouton pour ajouter une nouvelle tâche -->
-                        <button onclick="openPopup(1)">Ajouter Tâche</button> <!-- Pour "À Faire" -->
-                        <form id="form-todo" action="./gestionTask/creer.php" method="post" style="display:none;">
-                            <input type="text" name="title" placeholder="Titre" required>
-                            <textarea name="body" placeholder="Description"></textarea>
-                            <input type="hidden" name="status_id" value="1">
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Colonne "En Cours" -->
-                <div class="column" id="in-progress">
-                    <h3>En Cours</h3>
-                    <!-- Boucle pour afficher chaque tâche dans la colonne "En Cours" -->
-                    <?php foreach ($tasksByStatus['en cours'] as $task): ?>
-                        <div class='task' id="task-<?= $task['id'] ?>">
-                            <span class="task-title">
-                                <?= htmlspecialchars($task['title']) ?>
-                            </span>
-                            <p class="task-body" style="display:none;">
-                                <?= htmlspecialchars($task['body']) ?>
-                            </p>
-                            <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
-                        </div>
-                    <?php endforeach; ?>
-                    <!-- Bouton pour ajouter une nouvelle tâche -->
-                    <button onclick="openPopup(2)">Ajouter Tâche</button> <!-- Pour "En Cours" -->
-                    <form id="form-in-progress" action="./gestionTask/creer.php" method="post" style="display:none;">
-                        <input type="text" name="title" placeholder="Titre" required>
-                        <textarea name="body" placeholder="Description"></textarea>
-                        <input type="hidden" name="status_id" value="2">
-                    </form>
-                </div>
-
-                <!-- Colonne "Terminé" -->
-                <div class="column" id="done">
-                    <h3>Terminé</h3>
-                    <!-- Boucle pour afficher chaque tâche dans la colonne "Terminé" -->
-                    <?php foreach ($tasksByStatus['terminé'] as $task): ?>
-                        <div class='task' id="task-<?= $task['id'] ?>">
-                            <span class="task-title">
-                                <?= htmlspecialchars($task['title']) ?>
-                            </span>
-                            <p class="task-body" style="display:none;">
-                                <?= htmlspecialchars($task['body']) ?>
-                            </p>
-                            <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
-                        </div>
-                    <?php endforeach; ?>
-                    <!-- Bouton pour ajouter une nouvelle tâche -->
-                    <button onclick="openPopup(3)">Ajouter Tâche</button> <!-- Pour "Terminé" -->
-                    <form id="form-done" action="./gestionTask/creer.php" method="post" style="display:none;">
-                        <input type="text" name="title" placeholder="Titre" required>
-                        <textarea name="body" placeholder="Description"></textarea>
-                        <input type="hidden" name="status_id" value="3">
-                    </form>
-                </div>
+<script src="./js/script.js"></script>
+    <div class="stats-container">
+        <h3><?= $totalTasks ?> Tâches</h3>
+    </div>
+    <div class="todo-container">
+        <div class="todo-card" id="todo">
+            <div>
+                <p>À Faire (<?= count($tasksByStatus['à faire']) ?>)</p>
+                <?php foreach ($tasksByStatus['à faire'] as $task): ?>
+                    <button class="todo task" onclick="openDetailsPopup(<?= $task['id'] ?>)" id="task-<?= $task['id'] ?>">
+                        <span class="task-title todo-title">
+                            <?= htmlspecialchars($task['title']) ?>
+                        </span>
+                        <p class="task-body todo-body" style="display:none;">
+                            <?= htmlspecialchars($task['body']) ?>
+                        </p>
+                        <div class="member-icon"><?= htmlspecialchars($circleText) ?></div>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+            <div>
+                <!-- Bouton pour ajouter une nouvelle tâche -->
+                <button class="todo-add-btn" onclick="openPopup(1)">
+                    <img class="todo-add-icon" src="./assets/images/plus.png" alt="Add Task">Ajouter une tâche
+                </button>
+                <form id="form-todo" action="./gestionTask/creer.php" method="post" style="display:none;">
+                    <input type="text" name="title" placeholder="Titre" required>
+                    <textarea name="body" placeholder="Description"></textarea>
+                    <input type="hidden" name="status_id" value="1">
+                </form>
             </div>
         </div>
+
+        <!-- Colonne "En Cours" -->
+        <div class="todo-card" id="in-progress">
+            <div>
+                <p>En Cours (<?= count($tasksByStatus['en cours']) ?>)</p>
+                <!-- Boucle pour afficher chaque tâche dans la colonne "En Cours" -->
+                <?php foreach ($tasksByStatus['en cours'] as $task): ?>
+                    <button onclick="openDetailsPopup(<?= $task['id'] ?>)" class='task todo' id="task-<?= $task['id'] ?>">
+                        <span class="task-title todo-title">
+                            <?= htmlspecialchars($task['title']) ?>
+                        </span>
+                        <p class="task-body todo-body" style="display:none;">
+                            <?= htmlspecialchars($task['body']) ?>
+                        </p>
+                        <div class="member-icon"><?= htmlspecialchars($circleText) ?></div>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+            <div>
+                <!-- Bouton pour ajouter une nouvelle tâche -->
+                <button class="todo-add-btn" onclick="openPopup(2)">
+                    <img class="todo-add-icon" src="./assets/images/plus.png" alt="Add Task">
+                    Ajouter une tâche
+                </button> <!-- Pour "En Cours" -->
+                <form id="form-in-progress" action="./gestionTask/creer.php" method="post" style="display:none;">
+                    <input type="text" name="title" placeholder="Titre" required>
+                    <textarea name="body" placeholder="Description"></textarea>
+                    <input type="hidden" name="status_id" value="2">
+                </form>
+            </div>
         </div>
-    </main>
+
+        <!-- Colonne "Terminé" -->
+        <div class="todo-card" id="done">
+            <div>
+                <p>Terminé (<?= count($tasksByStatus['terminé']) ?>)</p>
+                <!-- Boucle pour afficher chaque tâche dans la colonne "Terminé" -->
+                <?php foreach ($tasksByStatus['terminé'] as $task): ?>
+                    <button onclick="openDetailsPopup(<?= $task['id'] ?>)" class='task todo' id="task-<?= $task['id'] ?>">
+                        <span class="task-title todo-title">
+                            <?= htmlspecialchars($task['title']) ?>
+                        </span>
+                        <p class="task-body todo-body" style="display:none;">
+                            <?= htmlspecialchars($task['body']) ?>
+                        </p>
+                        <div class="member-icon"><?= htmlspecialchars($circleText) ?></div>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+            <div>
+                <!-- Bouton pour ajouter une nouvelle tâche -->
+                <button class="todo-add-btn" onclick="openPopup(3)">
+                <img class="todo-add-icon" src="./assets/images/plus.png" alt="Add Task">
+                    Ajouter une tâche
+                </button> <!-- Pour "Terminé" -->
+                <form id="form-done" action="./gestionTask/creer.php" method="post" style="display:none;">
+                    <input type="text" name="title" placeholder="Titre" required>
+                    <textarea name="body" placeholder="Description"></textarea>
+                    <input type="hidden" name="status_id" value="3">
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Divers popups pour la gestion des tâches (ajout, modification, détails) -->
     <!-- Popup pour Ajouter une Tâche -->
     <div id="task-popup" class="task-popup">
@@ -124,10 +138,12 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
             <span class="close-btn" onclick="closePopup()">&times;</span>
             <form action="./gestionTask/creer.php" method="post">
                 <h2>Ajouter une Nouvelle Tâche</h2>
-                <input type="text" name="title" placeholder="Titre" required>
-                <textarea name="body" placeholder="Description"></textarea>
+                <input class="edit-input" type="text" name="title" placeholder="Titre" required>
+                <textarea class="edit-input" name="body" placeholder="Description"></textarea>
                 <input type="hidden" name="status_id" id="popup-status-id">
-                <button type="submit" name="submit">Créer</button>
+                <button class="" type="submit" name="submit">
+                    <img class="todo-icon check-icon" src="./assets/images/check.png" alt="">
+                </button>
             </form>
         </div>
     </div>
@@ -136,18 +152,20 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
     <div id="edit-task-popup" class="task-popup" style="display:none;">
         <div class="task-popup-content">
             <span class="close-btn" onclick="closeEditPopup()">&times;</span>
-            <h2>Modifier la Tâche</h2>
+            <h3>Modifier la tâche</h3>
             <form id="edit-task-form" action="./gestionTask/modifier.php" method="post">
                 <input type="hidden" name="task_id" id="edit-task-id">
                 <div class="form-group">
-                    <label for="edit-task-title">Titre de la Tâche</label>
-                    <input type="text" name="title" id="edit-task-title" placeholder="Titre" required>
+                    <label for="edit-task-title">Titre</label>
+                    <input class="edit-input" type="text" name="title" id="edit-task-title" placeholder="Titre" required>
                 </div>
                 <div class="form-group">
                     <label for="edit-task-body">Description</label>
-                    <textarea name="body" id="edit-task-body" placeholder="Description"></textarea>
+                    <textarea class="edit-input" name="body" id="edit-task-body" placeholder="Description"></textarea>
                 </div>
-                <button type="submit" name="submit">Enregistrer les modifications</button>
+                <button class="todo-btn" type="submit" name="submit">
+                    <img class="todo-icon check-icon" src="./assets/images/check.png" alt="">
+                </button>
             </form>
         </div>
     </div>
@@ -157,24 +175,33 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="task-popup-content">
             <span class="close-btn" onclick="closeDetailsPopup()">&times;</span>
             <h2 id="popup-title"></h2>
-            <p id="popup-body"></p>
-            <button onclick="prepareEditTask(window.currentTaskId)">Modifier</button>
-            <button onclick="deleteTask()">Supprimer</button>
-            <button onclick="moveTask(window.currentTaskId, 'left')">←</button>
-            <button onclick="moveTask(window.currentTaskId, 'right')">→</button>
+            <div id="popup-body"></div>
+            <div class="todo-actions">
+                <button class="todo-btn" onclick="moveTask(window.currentTaskId, 'left')">
+                    <img class="todo-icon carret carret-left" src="./assets/images/carret-right.png" alt="">
+                </button>
+                <button class="todo-btn" onclick="moveTask(window.currentTaskId, 'right')">
+                    <img class="todo-icon carret" src="./assets/images/carret-right.png" alt="">
+                </button>
+                <button class="todo-btn" onclick="prepareEditTask(window.currentTaskId)">
+                    <img class="todo-icon" src="./assets/images/edit.png" alt="Modifier">
+                </button>
+                <button class="todo-btn" onclick="deleteTask()">
+                    <img class="todo-icon" src="./assets/images/delete.png" alt="Supprimer">
+                </button>
+            </div>
             <div class="assign-task">
                 <label for="assign-user">Assigner à :</label>
-                <select id="assign-user">
+                <select class="assign-input" id="assign-user">
                     <?php foreach ($userList as $user): ?>
                         <option value="<?= $user['id'] ?>">
                             <?= htmlspecialchars($user['username']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <button onclick="assignTaskToUser(window.currentTaskId)">Assigner</button>
+                <button class="todo-btn" onclick="assignTaskToUser(window.currentTaskId)">
+                    <img class="todo-icon check-icon" src="./assets/images/check.png" alt="Assigner">
+                </button>
             </div>
         </div>
     </div>
-</body>
-
-</html>

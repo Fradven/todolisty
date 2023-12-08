@@ -52,7 +52,7 @@ class SignupContr extends Signup
 
     private function invalidUsername()
     {
-        if (!preg_match("/^[a-zA-Z0-9]*$/", $this->username))
+        if (!preg_match("/^[a-zA-Z0-9-_\.]*$/", $this->username))
             return false;
         else
             return true;
