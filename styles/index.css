@@ -850,6 +850,10 @@ body.members-page #content {
     align-self: flex-end;
 }
 
+.task-priority {
+    color: var(--background-color-nav-link-active);
+}
+
 /* MEMBERS PAGE  */
 
 .workspace.private,
