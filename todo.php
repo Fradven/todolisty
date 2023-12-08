@@ -8,7 +8,11 @@ $conn = $dbh->connect(); // Connexion à la base de données
 $userId = $_SESSION['usernameid']; // Récupération de l'ID de l'utilisateur connecté
 
 // Préparation et exécution de la requête SQL pour récupérer les tâches visibles par l'utilisateur
-$stmt = $conn->prepare("SELECT t.*, s.label as status_label FROM tasks t JOIN status s ON t.status_id = s.id WHERE assign_user_id = ?");
+$stmt = $conn->prepare("SELECT t.*, s.label as status_label, p.label as priority_label, u.username as username FROM tasks t 
+LEFT OUTER JOIN status s ON t.status_id = s.id 
+LEFT OUTER JOIN priority p ON t.priority_id = p.id 
+LEFT OUTER JOIN users u ON t.assign_user_id = u.id
+WHERE assign_user_id = ?");
 $stmt->execute([$userId]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC); // Stockage des tâches dans une variable
 
@@ -140,6 +144,12 @@ if (!empty($tasks['username'])) {
                 <h2>Ajouter une Nouvelle Tâche</h2>
                 <input class="edit-input" type="text" name="title" placeholder="Titre" required>
                 <textarea class="edit-input" name="body" placeholder="Description"></textarea>
+                <select class="edit-input" name="priority_id" required>
+                    <option value="0">Choisir une priorité</option>
+                    <option value="1">Bas</option>
+                    <option value="2">Moyen</option>
+                    <option value="3">Élevé</option>
+                </select>
                 <input type="hidden" name="status_id" id="popup-status-id">
                 <button class="" type="submit" name="submit">
                     <img class="todo-icon check-icon" src="./assets/images/check.png" alt="">
@@ -163,6 +173,12 @@ if (!empty($tasks['username'])) {
                     <label for="edit-task-body">Description</label>
                     <textarea class="edit-input" name="body" id="edit-task-body" placeholder="Description"></textarea>
                 </div>
+                <select class="edit-input" name="priority_id" required>
+                    <option value="0">Choisir une priorité</option>
+                    <option value="1">Bas</option>
+                    <option value="2">Moyen</option>
+                    <option value="3">Élevé</option>
+                </select>
                 <button class="todo-btn" type="submit" name="submit">
                     <img class="todo-icon check-icon" src="./assets/images/check.png" alt="">
                 </button>

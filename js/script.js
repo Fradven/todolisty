@@ -10,11 +10,13 @@ function closePopup() {
 
 function openDetailsPopup(taskId) {
     var task = document.getElementById('task-' + taskId);
-    var title = task.querySelector('.task-title').innerText;
-    var body = task.querySelector('.task-body').innerText;
+    var title = task.querySelector('.task-title').textContent;
+    var body = task.querySelector('.task-body').textContent;
+    var priority = task.querySelector('.task-priority').textContent;
 
-    document.getElementById('popup-title').innerText = title;
-    document.getElementById('popup-body').innerText = body;
+    document.getElementById('popup-title').textContent = title;
+    document.getElementById('popup-body').textContent = body;
+    document.getElementById('priority-value').textContent = priority;
 
     // Stockez l'ID de la tâche pour les opérations de modification et de suppression
     window.currentTaskId = taskId;
