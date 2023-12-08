@@ -83,9 +83,9 @@ $result = $conn->query($sql);
                         <form action="./includes/signup.inc.php" method="post">
                             <input class="members-input" type="text" id="new_username" name="username"
                                 placeholder="Nouveau membre" required>
-                            <input class="members-input" type="password" id="new_username" name="pwd"
+                            <input class="members-input" type="password" name="pwd"
                                 placeholder="Mot de passe" required>
-                            <input class="members-input" type="password" id="new_username" name="pwdrepeat"
+                            <input class="members-input" type="password" name="pwdrepeat"
                                 placeholder="Confirmer mdp" required>
                             <label class="form-label" for="new_role">Rôle</label>
                             <select class="members-input" id="new_role" name="new_role" required>
@@ -101,7 +101,7 @@ $result = $conn->query($sql);
                                 ?>
                             </select>
 
-                            <button class="btn" type="submit" name="add_user">Ajouter Membre</button>
+                            <button class="btn" type="submit" name="submit">Ajouter Membre</button>
                         </form>
                     <?php } ?>
                 </div>

@@ -26,7 +26,6 @@ function openDetailsPopup(taskId) {
 
 function closeDetailsPopup() {
     document.getElementById('details-popup').style.display = 'none';
-    location.reload();
 }
 
 function editTask() {

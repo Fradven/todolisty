@@ -1,5 +1,4 @@
 <?php
-
 // Check if the form submit button named "submit" was clicked
 if(isset($_POST["submit"]))
 {
@@ -19,7 +18,10 @@ if(isset($_POST["submit"]))
     // Call the signupUser method from SignupContr to process user signup
     $signup->signupUser();
 
-    // Redirect to index page with a success message (assuming no errors occurred)
-    header("location: ../index.php?error=none");
+    // Determine the redirection URL based on the referring page
+    $redirectURL = isset($_SERVER['HTTP_REFERER']) && basename($_SERVER['HTTP_REFERER']) === 'members.php' ? '../members.php' : '../index.php';
+
+    // Redirect to the appropriate page with a success message (assuming no errors occurred)
+    header("location: $redirectURL?error=none");
 }
 ?>
