@@ -1,12 +1,13 @@
 .tableau-tasks {
     width: 100%;
     border-collapse: collapse;
-    color: var(--main-color); 
-    background-color: var(--background-color); 
+    color: var(--main-color);
+    background-color: var(--background-color);
     font-family: var(--font-family);
 }
 
-.tableau-tasks th, .tableau-tasks td {
+.tableau-tasks th,
+.tableau-tasks td {
     text-align: left;
     padding: 8px;
     border: 1px solid var(--border-color-container);
@@ -28,7 +29,7 @@
     display: inline-block;
     width: 30px;
     height: 30px;
-    background-color: var(--button-primary-color); 
+    background-color: var(--button-primary-color);
     border-radius: 50%;
     color: white;
     text-align: center;
@@ -41,8 +42,8 @@
 .filter-form {
     text-align: center;
     padding: 15px;
-    background-color: var(--background-color); 
-    color: var(--main-color); 
+    background-color: var(--background-color);
+    color: var(--main-color);
     border-radius: 8px;
     margin-bottom: 20px;
     display: inline-block;

@@ -493,6 +493,10 @@ header .logo-img {
     width: 100%;
 }
 
+body.tableur-page #content {
+    padding: 3rem;
+}
+
 body.members-page {
     background-image: none;
     background-color: var(--background-color);
