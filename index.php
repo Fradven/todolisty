@@ -3,7 +3,8 @@ $title = "Todolisty | Empower Your Day";
 $bodyClass = "home-page";
 ?>
 <?php include './includes/header.php'; ?>
-    <!-- Créer condition pour afficher soit login sans sidebar soit page sans login -->
+    <!-- Créer condition (login success) pour afficher soit login (ci-dessous) sans sidebar soit tout sauf login (garder le header dans les deux cas) -->
+
     <!-- <div class="login-signup-container">
         <div class="top-content">
             <h1 class="page-title">Todolisty.</h1>
@@ -73,7 +74,7 @@ $bodyClass = "home-page";
     <main id="main-content">
         <?php include './includes/sidebar.php'; ?>
         <div id="content">
-            <!-- placer todolist ici  -->
+            <!-- placer todolist ici en dur  -->
         </div>    
     </main>
 </body>

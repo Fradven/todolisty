@@ -1,22 +1,9 @@
+<?php include './includes/db_connection.inc.php'; ?>
 <?php
-// Database connection details
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "todolisty";
-
 $title = "Members - Todolisty";
 $bodyClass = "members-page";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch the list of members from the 'users' table
 $sql = "SELECT u.id, u.username, u.created_at, r.label as role_label 
         FROM users u
         INNER JOIN role r ON u.role_id = r.id";
@@ -39,7 +26,7 @@ $result = $conn->query($sql);
             </div>
             <div class="members-container">
                 <div class="left">
-                    <h2>Members</h2>
+                    <h2>Membres</h2>
                     <p>Membres de tableaux d'espace de travail</p>
                     <ul class="members-sidebar">
                         <li class="members-sidelink">
@@ -69,16 +56,16 @@ $result = $conn->query($sql);
                             travail.
                         </p>
                     </div>
+                    <!-- Ci-dessous, la toolbar contenant le filtre et le form de création d'utilisateur uniquement visible par l'admin  -->
+
                     <div class="members-toolbar">
                         <form action="">
                             <input class="members-input" type="search" placeholder="Filtrer par nom">
                             <button class="btn" type="submit">Filtrer</button>
                         </form>
                         <form action="./includes/process_add_member.php" method="post">
-                            <label class="form-label" for="new_username">Nom d'utilisateur</label>
-                            <input class="members-input" type="text" id="new_username" name="new_username" required>
-
-                            <label class="form-label" for="new_role">Assigner le rôle</label>
+                            <input class="members-input" type="text" id="new_username" name="new_username" placeholder="Nouveau membre" required>
+                            <label class="form-label" for="new_role">Rôle</label>
                             <select class="members-input" id="new_role" name="new_role" required>
                                 <!-- Fetch and display roles from the database -->
                                 <?php
@@ -99,12 +86,31 @@ $result = $conn->query($sql);
                         <?php while ($row = $result->fetch_assoc()): ?>
                         <li class="member">
                             <div class="member-card">
-                                <img class="member-icon" src="./assets/images/account.png" alt="">
+                            <?php
+                                if (!function_exists('getBackgroundColor')) {
+                                    function getBackgroundColor($role) {
+                                        if ($role === 'Admin') {
+                                            return '#FF991F';
+                                        } elseif ($role === 'User') {
+                                            return '#4bce97';
+                                        } else {
+                                            return '#4bce97';
+                                        }
+                                    }
+                                }
+                                $username = $row["username"];
+                                $firstLetter = strtoupper(substr($username, 0, 1));
+                                $role = $row["role_label"];
+                                ?>
+                                <div class="member-icon" style="background-color: <?= getBackgroundColor($role) ?>;"><?= $firstLetter ?></div>
                                 <div class="details">
                                     <p class="username"><?= $row["username"] ?></p>
-                                    <p class="role">role : <?= $row["role_label"] ?></p>
+                                    <p class="role">role: <?= $row["role_label"] ?></p>
                                 </div>
                             </div>
+
+                            <!-- ci-dessous les deux form d'action sur les utilisateurs, uniquement visible par l'admin. Créer condition  -->
+
                             <div class="member-actions">
                                 <!-- Form to change the role -->
                                 <form action="./includes/process_member.php" method="post">
