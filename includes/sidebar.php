@@ -1,3 +1,18 @@
+<?php
+// Get the current page URL
+$current_page = basename($_SERVER['REQUEST_URI']);
+
+// Define the URLs and labels for the two links
+$link1_url = 'index.php';
+$link2_url = 'members.php';
+
+// Determine the active class for each link
+$class1 = ($link1_url == $current_page) ? 'active' : '';
+$class2 = ($link2_url == $current_page) ? 'active' : '';
+?>
+
+
+
 <div id="sidebar">
     <div class="workspace">
         <a class="workspace-logo link" href="#">T</a>
@@ -17,7 +32,7 @@
             </a>
         </li>
         <li class="sidebar-link">
-            <a class="link" href="./members.php">
+            <a class="link <?= $class2 ?>" href="<?= $link2_url ?>">
                 <img class="sidebar-nav-icon" src="./assets/images/user.png" alt="">
                 <span class="link">Membres</span>
                 <img class="icon-plus" src="./assets/images/plus.png" alt="">
@@ -54,8 +69,8 @@
                 <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
-                <a class="link" href="#">
-                    <img class="sidebar-nav-icon" src="./assets/images/" alt="">
+                <a class="link <?= $class1 ?>" href="<?= $link1_url ?>">
+                    <img class="sidebar-nav-icon" src="./assets/images/bg-min.jpg" alt="">
                     <span>Tâches</span>
                 </a>
             </div>
