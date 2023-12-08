@@ -4,7 +4,7 @@ session_start(); // Start the session at the beginning
 
 class Login extends Dbh {
 
-    protected function getUser($username, $pwd) {
+    public function getUser($username, $pwd) {
         $stmt = $this->connect()->prepare('SELECT id, username, role_id, password FROM users WHERE username = ?;');
         
         if (!$stmt->execute(array($username))) {
