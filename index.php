@@ -82,7 +82,7 @@ if (!isset($_SESSION["usernameid"])) {
     <?php include './includes/sidebar.php'; ?>
     <div id="content">
         <!-- placer todolist ici en dur  -->
-        <?php include './dashboard.php'; ?>
+        <?php include './todo.php'; ?>
     </div>
 </main>
 </body>
