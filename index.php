@@ -1,11 +1,15 @@
-<?php 
-$title = "Todolisty | Empower Your Day"; 
+<?php
+session_start();
+$title = "Todolisty | Empower Your Day";
 $bodyClass = "home-page";
 ?>
 <?php include './includes/header.php'; ?>
-    <!-- Créer condition (login success) pour afficher soit login (ci-dessous) sans sidebar soit tout sauf login (garder le header dans les deux cas) -->
+<!-- Créer condition (login success) pour afficher soit login (ci-dessous) sans sidebar soit tout sauf login (garder le header dans les deux cas) -->
 
-    <!-- <div class="login-signup-container">
+<?php
+if (!isset($_SESSION["usernameid"])) {
+    ?>
+    <div class="login-signup-container">
         <div class="top-content">
             <h1 class="page-title">Todolisty.</h1>
             <h3 class="page-subtitle">Empower your day</h3>
@@ -19,28 +23,26 @@ $bodyClass = "home-page";
                 <form id="login-form" class="tab-content tab-active" action="./includes/login.inc.php" method="post">
                     <div class="form-container">
                         <label for="l-uid">username</label>
-                        <input type="text" name="l-uid" required>
+                        <input type="text" name="username" required>
                         <label for="l-pwd">password</label>
-                        <input type="password" name="l-pwd" required>
+                        <input type="password" name="pwd" required>
                         <div class="form-actions">
                             <button class="btn btn-outline" type="reset">Reset</button>
-                            <button class="btn" type="submit">Login</button>
+                            <button class="btn" type="submit" name="submit">Login</button>
                         </div>
                     </div>
                 </form>
                 <form id="signup-form" class="tab-content" action="./includes/signup.inc.php" method="post">
                     <div class="form-container">
-                        <label for="r-email">email</label>
-                        <input type="email" name="r-email"required>
                         <label for="r-uid">username</label>
-                        <input type="text" name="r-uid" required>
+                        <input type="text" name="username" required>
                         <label for="r-pwd">password</label>
-                        <input type="password" name="r-pwd" required>
+                        <input type="password" name="pwd" required>
                         <label for="r-pwdrepeat">repeat password</label>
-                        <input type="password" name="r-pwdrepeat" required>
+                        <input type="password" name="pwdrepeat" required>
                         <div class="form-actions">
                             <button class="btn btn-outline" type="reset">Reset</button>
-                            <button class="btn" type="submit">Sign up</button>
+                            <button class="btn" type="submit" name="submit">>Sign up</button>
                         </div>
                     </div>
                 </form>
@@ -54,15 +56,15 @@ $bodyClass = "home-page";
                 function toggleTab(tabId, tabContentId) {
                     const tabs = document.querySelectorAll('.tab');
                     const tabContent = document.querySelectorAll('.tab-content');
-    
+
                     tabContent.forEach(content => {
-                    content.classList.remove('tab-active');
+                        content.classList.remove('tab-active');
                     });
-                    
+
                     tabs.forEach(tab => {
-                    tab.classList.remove('tab-active');
+                        tab.classList.remove('tab-active');
                     });
-    
+
                     const selectedTabContent = document.getElementById(tabContentId);
                     const selectedTab = document.getElementById(tabId);
                     selectedTabContent.classList.add('tab-active');
@@ -70,12 +72,18 @@ $bodyClass = "home-page";
                 }
             </script>
         </div>
-    </div> -->
-    <main id="main-content">
-        <?php include './includes/sidebar.php'; ?>
-        <div id="content">
-            <!-- placer todolist ici en dur  -->
-        </div>    
-    </main>
+    </div>
+    <?php
+} else {
+?>
+<?php } ?>
+
+<main id="main-content">
+    <?php include './includes/sidebar.php'; ?>
+    <div id="content">
+        <!-- placer todolist ici en dur  -->
+    </div>
+</main>
 </body>
+
 </html>
