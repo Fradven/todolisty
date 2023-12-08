@@ -12,11 +12,12 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     $sql = "SELECT u.id, u.username, u.created_at, r.label as role_label 
             FROM users u
             INNER JOIN role r ON u.role_id = r.id
-            WHERE u.username LIKE '%$search%'";
+            WHERE u.username LIKE '%$search%' AND deleted_at IS NULL";
 } else {
     $sql = "SELECT u.id, u.username, u.created_at, r.label as role_label 
             FROM users u
-            INNER JOIN role r ON u.role_id = r.id";
+            INNER JOIN role r ON u.role_id = r.id
+            WHERE deleted_at IS NULL";
 }
 
 $result = $conn->query($sql);
@@ -139,7 +140,6 @@ $result = $conn->query($sql);
                             </div>
 
                             <!-- ci-dessous les deux form d'action sur les utilisateurs, uniquement visible par l'admin. Créer condition  -->
-
                             <?php if ($isUserAdmin) { ?>
                                 <div class="member-actions">
                                     <!-- Form to change the role -->
@@ -154,7 +154,6 @@ $result = $conn->query($sql);
                                         <button class="btn" type="submit" name="delete_member">Retirer Membre</button>
                                     </form>
                                 </div>
-
                             <?php } ?>
                         </li>
                     <?php endwhile; ?>
