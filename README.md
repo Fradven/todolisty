@@ -3,6 +3,8 @@
 
 - pour les deux options "Se connecter"/"S'inscire", l'utilsateur doit fournir son identifiant et un mot de passe afin d'y avoir accès à un compte
 
+- pour se connecté en temps qu'utilisteur se connecté en tent que `adam` avec mot de passe `a`
+
 
  # interface principale 
 
