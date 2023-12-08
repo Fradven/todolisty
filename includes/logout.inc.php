@@ -1,8 +1,6 @@
 <?php
-if (isset($_POST['logout'])) {
-    session_start();
-    session_unset();
-    session_destroy();
-    header("Location: ../index.php?error=logout");
-    exit();
-}
+
+session_start();
+session_unset();
+session_destroy();
+header("location: ../index?error=logout");
