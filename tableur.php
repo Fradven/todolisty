@@ -10,7 +10,7 @@ $orderBy = 'title';
 $orderDirection = 'ASC';
 
 // Vérifiez si un critère de tri a été spécifié et est valide
-if (isset($_GET['sort']) && in_array($_GET['sort'], ['title', 'status', 'created_at'])) {
+if (isset($_GET['sort']) && in_array($_GET['sort'], ['title', 'status', 'priority_id', 'created_at'])) {
     $orderBy = $_GET['sort'];
 }
 
@@ -24,7 +24,8 @@ $sql = "SELECT t.title, s.label AS status, p.label AS priority, t.created_at, u.
         LEFT JOIN status s ON t.status_id = s.id
         LEFT JOIN priority p ON t.priority_id = p.id
         LEFT JOIN users u ON t.assign_user_id = u.id
-        ORDER BY $orderBy $orderDirection";
+        ORDER BY " . ($orderBy === 'priority' ? 'p.label' : $orderBy) . " $orderDirection";
+
 
 try {
     $stmt = $pdo->prepare($sql);
@@ -35,7 +36,7 @@ try {
 }
 ?>
 
-<link rel="stylesheet" href="./styles/tableau.css">
+<link rel="stylesheet" href="./styles/tableur.css">
 <main id="main-content">
     <?php include './includes/sidebar.php'; ?>
     <div id="content">

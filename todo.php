@@ -22,6 +22,12 @@ foreach ($tasks as $task) {
 $userListStmt = $conn->prepare("SELECT id, username FROM users WHERE id != ?");
 $userListStmt->execute([$userId]);
 $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Compte le nombre total de tâches dans la base de données
+$countTasksStmt = $conn->prepare("SELECT COUNT(*) FROM tasks");
+$countTasksStmt->execute();
+$totalTasks = $countTasksStmt->fetchColumn();
 ?>
 
 <!DOCTYPE html>
