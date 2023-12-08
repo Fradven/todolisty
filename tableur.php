@@ -70,40 +70,62 @@ try {
 
 
 
-                <!-- Fin de la section de filtrage -->
-                <table class="tableau-tasks">
-                    <thead>
-                        <tr>
-                            <th>Tâche</th>
-                            <th>Status</th>
-                            <th>Priorité</th>
-                            <th>Date de création</th>
-                            <th>Assignée à</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <!-- Fin de la section de filtrage -->
+            <table class="tableau-tasks">
+                <thead>
+                    <tr>
+                        <th>Tâche</th>
+                        <th>Status</th>
+                        <th>Priorité</th>
+                        <th>Date de création</th>
+                        <th>Assignée à</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php foreach ($tasks as $task): ?>
-            <tr>
-                <td><?= htmlspecialchars($task['title']) ?></td>
-                <td><?= htmlspecialchars($task['status']) ?></td>
-                <td><?= htmlspecialchars($task['priority']) ?></td>
-                <td><?= date('d/m/Y H:i', strtotime($task['created_at'])) ?></td>
-                <td>
-                    <?php
-                    // Déterminez le texte à afficher dans le cercle.
-                    $circleText = 'N/A'; // Texte par défaut si aucun utilisateur n'est assigné
-                    if (!empty($task['username'])) {
-                        // Si un utilisateur est assigné, utilisez la première lettre en majuscule et la deuxième en minuscule.
-                        $circleText = strtoupper(substr($task['username'], 0, 1));
-                    } 
-                    ?>
-                    <div class="member-icon">
-                        <?= htmlspecialchars($circleText) ?>
-                    </div>
-                </td>
-            </tr>
-        </section>
+                        <tr>
+                            <td>
+                                <?= htmlspecialchars($task['title']) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($task['status']) ?>
+                            </td>
+                            <td>
+                                <?= htmlspecialchars($task['priority']) ?>
+                            </td>
+                            <td>
+                                <?= date('d/m/Y H:i', strtotime($task['created_at'])) ?>
+                            </td>
+                            <td>
+                                <?php
+                                // Déterminez le texte à afficher dans le cercle.
+                                $circleText = 'N/A'; // Texte par défaut si aucun utilisateur n'est assigné
+                                if (!empty($task['username'])) {
+                                    // Si un utilisateur est assigné, utilisez la première lettre en majuscule et la deuxième en minuscule.
+                                    $circleText = strtoupper(substr($task['username'], 0, 1));
+                                }
+
+                                // Définir un tableau associatif de correspondance entre caractères et couleurs aléatoires
+                                $colorMapping = [];
+
+                                // Générer des couleurs aléatoires pour chaque lettre de A à Z
+                                for ($i = 65; $i <= 90; $i++) {
+                                    $randomColor = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6); // Générer une couleur hexadécimale aléatoire
+                                    $character = chr($i); // Convertir le code ASCII en caractère
+                                    $colorMapping[$character] = $randomColor; // Associer la couleur au caractère
+                                }
+
+                                // Récupérer la couleur associée au caractère ou utiliser une couleur par défaut
+                                $backgroundColor = isset($colorMapping[$circleText]) ? $colorMapping[$circleText] : '#CCCCCC';
+                                ?>
+                                <div class="member-icon" style="background-color: <?= $backgroundColor ?>;">
+                                    <?= htmlspecialchars($circleText) ?>
+                                </div>
+                            </td>
+                        </tr>
+            </section>
         <?php endforeach; ?>
-        </main>
-    </body>
+</main>
+</body>
+
 </html>
