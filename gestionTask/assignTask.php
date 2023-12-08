@@ -18,11 +18,12 @@ if (isset($_POST['task_id']) && isset($_POST['assignee_id'])) {
     try {
         // On essaie d'exécuter la requête avec les identifiants donnés
         $stmt->execute([$assigneeId, $taskId]);
-        echo "Tâche assignée avec succès."; // Si tout se passe bien, on indique que c'est bon
+        
+        header("location: ../index?success=taskReasigned"); // Si tout se passe bien, on indique que c'est bon
     } catch (PDOException $e) {
         // Si ça se passe mal, on enregistre l'erreur dans un fichier log
         error_log($e->getMessage());
-        echo "Erreur lors de l'assignation de la tâche."; // Et on dit qu'il y a eu un souci
+        header("location: ../index?error=taskNotReasigned"); // Et on dit qu'il y a eu un souci
     }
 }
 ?>
