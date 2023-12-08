@@ -5,10 +5,12 @@ $current_page = basename($_SERVER['REQUEST_URI']);
 // Define the URLs and labels for the two links
 $link1_url = 'index.php';
 $link2_url = 'members.php';
+$link3_url = 'tableur.php';
 
 // Determine the active class for each link
 $class1 = ($link1_url == $current_page) ? 'active' : '';
 $class2 = ($link2_url == $current_page) ? 'active' : '';
+$class3 = ($link3_url == $current_page) ? 'active' : '';
 ?>
 
 
@@ -21,7 +23,7 @@ $class2 = ($link2_url == $current_page) ? 'active' : '';
             <p>Premium</p>
         </div>
         <div class="workspace-icon">
-            <img class="carret-left" src="/todolisty/assets/images/carret-left.svg" alt="">
+            <img class="carret-left" src="./assets/images/carret-left.svg" alt="">
         </div>
     </div>
     <ul class="sidebar-nav">
@@ -48,10 +50,10 @@ $class2 = ($link2_url == $current_page) ? 'active' : '';
         <li>
             <div class="sidebar-link sidebar-subsection">
                 <p>Vues de l'espace de travail</p>
-                <img class="icon-plus" src="/todolisty/assets/images/plus.png" alt="">
+                <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
-                <a class="link" href="#">
+                <a class="link <?= $class3 ?>" href="<?= $link3_url ?>">
                     <img class="sidebar-nav-icon" src="./assets/images/tableur.png" alt="">
                     <span>Tableur</span>
                 </a>
@@ -66,7 +68,7 @@ $class2 = ($link2_url == $current_page) ? 'active' : '';
         <li>
             <div class="sidebar-link sidebar-subsection">
                 <p>Vos tableaux</p>
-                <img class="icon-plus" src="/todolisty/assets/images/plus.png" alt="">
+                <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </div>
             <div class="sidebar-link">
                 <a class="link <?= $class1 ?>" href="<?= $link1_url ?>">
@@ -77,7 +79,7 @@ $class2 = ($link2_url == $current_page) ? 'active' : '';
         </li>
     </ul>
     <div class="trial-infos">
-        <img class="sidebar-nav-icon" src="/todolisty/assets/images/entreprise.png" alt="">
+        <img class="sidebar-nav-icon" src="./assets/images/entreprise.png" alt="">
         <p>7 jours restants pour votre essai gratuit de Premium.
             <a class="link" href="">Accéder à la page de facturation</a>
         </p> 

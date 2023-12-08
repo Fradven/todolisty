@@ -12,12 +12,12 @@ if (isset($_POST['task_id']) && isset($_POST['assignee_id'])) {
     $conn = $dbh->connect(); // Et là, on se connecte 
 
     // Préparation de la requête SQL pour mettre à jour l'assignation de la tâche
-    $sql = "UPDATE tasks SET assign_user_id = ?, visible_to_user_id = ? WHERE id = ?";
+    $sql = "UPDATE tasks SET assign_user_id = ? WHERE id = ?";
     $stmt = $conn->prepare($sql); // On prépare la requête
 
     try {
         // On essaie d'exécuter la requête avec les identifiants donnés
-        $stmt->execute([$assigneeId, $assigneeId, $taskId]);
+        $stmt->execute([$assigneeId, $taskId]);
         echo "Tâche assignée avec succès."; // Si tout se passe bien, on indique que c'est bon
     } catch (PDOException $e) {
         // Si ça se passe mal, on enregistre l'erreur dans un fichier log
