@@ -8,7 +8,7 @@ $conn = $dbh->connect(); // Connexion à la base de données
 $userId = $_SESSION['usernameid']; // Récupération de l'ID de l'utilisateur connecté
 
 // Préparation et exécution de la requête SQL pour récupérer les tâches visibles par l'utilisateur
-$stmt = $conn->prepare("SELECT t.*, s.label as status_label FROM tasks t JOIN status s ON t.status_id = s.id WHERE assign_user_id = ?");
+$stmt = $conn->prepare("SELECT t.*, s.label as status_label, p.label as priority_label FROM tasks t JOIN status s ON t.status_id = s.id JOIN priority p ON t.priority_id = p.id WHERE assign_user_id = ?");
 $stmt->execute([$userId]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC); // Stockage des tâches dans une variable
 
@@ -53,6 +53,9 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                                 <p class="task-body" style="display:none;">
                                     <?= htmlspecialchars($task['body']) ?>
                                 </p>
+                                <span class="task-priority" style="display:none;">
+                                <?= htmlspecialchars($task['priority_label']) ?>
+                                </span>
                                 <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
                             </div>
                         <?php endforeach; ?>
@@ -78,6 +81,9 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                             <p class="task-body" style="display:none;">
                                 <?= htmlspecialchars($task['body']) ?>
                             </p>
+                            <span class="task-priority" style="display:none;">
+                                <?= htmlspecialchars($task['priority_label']) ?>
+                                </span>
                             <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
                         </div>
                     <?php endforeach; ?>
@@ -102,6 +108,9 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                             <p class="task-body" style="display:none;">
                                 <?= htmlspecialchars($task['body']) ?>
                             </p>
+                            <span class="task-priority" style="display:none;">
+                                <?= htmlspecialchars($task['priority_label']) ?>
+                                </span>
                             <button onclick="openDetailsPopup(<?= $task['id'] ?>)">Détails</button>
                         </div>
                     <?php endforeach; ?>
@@ -126,6 +135,12 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                 <h2>Ajouter une Nouvelle Tâche</h2>
                 <input type="text" name="title" placeholder="Titre" required>
                 <textarea name="body" placeholder="Description"></textarea>
+                <select name="priority_id" required>
+                            <option value="">Choisir une priorité</option>
+                            <option value="1">Bas</option>
+                            <option value="2">Moyen</option>
+                            <option value="3">Élevé</option>
+                        </select>
                 <input type="hidden" name="status_id" id="popup-status-id">
                 <button type="submit" name="submit">Créer</button>
             </form>
@@ -147,6 +162,12 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
                     <label for="edit-task-body">Description</label>
                     <textarea name="body" id="edit-task-body" placeholder="Description"></textarea>
                 </div>
+                <select name="priority_id" required>
+                    <option value="">Choisir une priorité</option>
+                    <option value="1">Bas</option>
+                    <option value="2">Moyen</option>
+                    <option value="3">Élevé</option>
+                </select>
                 <button type="submit" name="submit">Enregistrer les modifications</button>
             </form>
         </div>
@@ -158,6 +179,7 @@ $userList = $userListStmt->fetchAll(PDO::FETCH_ASSOC);
             <span class="close-btn" onclick="closeDetailsPopup()">&times;</span>
             <h2 id="popup-title"></h2>
             <p id="popup-body"></p>
+            <p>Priorité : <span id="priority-value"></span></p>
             <button onclick="prepareEditTask(window.currentTaskId)">Modifier</button>
             <button onclick="deleteTask()">Supprimer</button>
             <button onclick="moveTask(window.currentTaskId, 'left')">←</button>
