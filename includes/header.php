@@ -59,9 +59,11 @@
                     </button>
                 </li>
                 <li>
-                    <a class="btn logout-btn" href="./includes/logout.inc.php">
-                        <img class="logout-icon" src="./assets/images/logout.png" alt="">
-                    </a>
+                    <form action="./includes/logout.inc.php" method="post">
+                        <button type="submit" class="btn logout-btn">
+                            <img class="logout-icon" src="./assets/images/logout.png" alt="">
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
