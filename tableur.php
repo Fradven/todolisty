@@ -116,7 +116,20 @@ try {
                                 }
 
                                 // Récupérer la couleur associée au caractère ou utiliser une couleur par défaut
-                                $backgroundColor = isset($colorMapping[$circleText]) ? $colorMapping[$circleText] : '#CCCCCC';
+                                
+                                if (!function_exists('getUsernameColor')) {
+                                    // Define the getUsernameColor function
+                                    function getUsernameColor($username) {
+                                        // Use a hash function to generate a unique color based on the username
+                                        $hash = md5($username);
+                                        
+                                        // Take the first 6 characters of the hash to get a valid hex color code
+                                        $colorCode = '#' . substr($hash, 0, 6);
+                                
+                                        return $colorCode;
+                                    }
+                                }
+                                $backgroundColor = getUsernameColor($task['username']);
                                 ?>
                                 <div class="member-icon" style="background-color: <?= $backgroundColor ?>;">
                                     <?= htmlspecialchars($circleText) ?>
@@ -124,9 +137,11 @@ try {
                                 <p><?= htmlspecialchars($task['username']) ?></p>
                             </td>
                         </tr>
-            </section>
-        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
+    </div>
 </main>
 </body>
-
 </html>

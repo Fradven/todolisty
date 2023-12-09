@@ -1,18 +1,32 @@
 <?php
 session_start();
-include './includes/db_connection.inc.php';
+include './classes/dbh.class.php';
+
+function getBackgroundColor($role)
+{
+    if ($role === 'Admin') {
+        return '#FF991F';
+    } elseif ($role === 'User') {
+        return '#4bce97';
+    } else {
+        return '#4bce97';
+    }
+}
+
+$dbh = new Dbh();
+$pdo = $dbh->connect();  // Use the PDO instance returned by the connect method
 
 $title = "Members - Todolisty";
 $bodyClass = "members-page";
 $isUserAdmin = $_SESSION["roleid"] == 1;
 
-// Filter the memeber list with search or else fetch everything
+// Filter the member list with search or else fetch everything
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];
     $sql = "SELECT u.id, u.username, u.created_at, r.label as role_label 
             FROM users u
             INNER JOIN role r ON u.role_id = r.id
-            WHERE u.username LIKE '%$search%' AND deleted_at IS NULL";
+            WHERE u.username LIKE :search AND deleted_at IS NULL";
 } else {
     $sql = "SELECT u.id, u.username, u.created_at, r.label as role_label 
             FROM users u
@@ -20,7 +34,25 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
             WHERE deleted_at IS NULL";
 }
 
-$result = $conn->query($sql);
+try {
+    $stmt = $pdo->prepare($sql);
+
+    if (isset($search)) {
+        $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+    }
+
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch roles
+    $sqlRoles = "SELECT id, label FROM role";
+    $stmtRoles = $pdo->query($sqlRoles);
+    $roles = $stmtRoles->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
+
 ?>
 
 <?php include './includes/header.php'; ?>
@@ -70,7 +102,24 @@ $result = $conn->query($sql);
                     </p>
                 </div>
                 <!-- Ci-dessous, la toolbar contenant le filtre et le form de création d'utilisateur uniquement visible par l'admin  -->
-
+                <div class="members-toolbar" style="margin-bottom: 1rem;">
+                <?php if ($isUserAdmin): ?>
+                    <form action="./includes/signup.inc.php" method="post">
+                        <input class="members-input" type="text" id="new_username" name="username" placeholder="Nouveau membre" required>
+                        <input class="members-input" type="password" name="pwd" placeholder="Mot de passe" required>
+                        <input class="members-input" type="password" name="pwdrepeat" placeholder="Confirmer mdp" required>
+                        <label class="form-label" for="new_role">Rôle</label>
+                        <select class="members-input" id="new_role" name="new_role" required>
+                            <?php
+                            // Fetch and display roles using PDO
+                            foreach ($roles as $rowRole):?>
+                            <option value='<?= $rowRole['id'] ?>'><?= $rowRole['label'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button class="btn" type="submit" name="submit">Ajouter Membre</button>
+                    </form>
+                </div>
+                <?php endif; ?>
                 <div class="members-toolbar">
                     <form action="" method="GET">
                         <input class="members-input" type="search" name="search" placeholder="Filtrer par nom"
@@ -79,84 +128,46 @@ $result = $conn->query($sql);
                     </form>
 
                     <!-- If the user has a roleid of 1, the user can access to admin view -->
-                    <?php if ($isUserAdmin) { ?>
-                        <form action="./includes/signup.inc.php" method="post">
-                            <input class="members-input" type="text" id="new_username" name="username"
-                                placeholder="Nouveau membre" required>
-                            <input class="members-input" type="password" name="pwd"
-                                placeholder="Mot de passe" required>
-                            <input class="members-input" type="password" name="pwdrepeat"
-                                placeholder="Confirmer mdp" required>
-                            <label class="form-label" for="new_role">Rôle</label>
-                            <select class="members-input" id="new_role" name="new_role" required>
-                                <!-- Fetch and display roles from the database -->
-                                <?php
-                                // Assuming $conn is your database connection
-                                $sqlRoles = "SELECT id, label FROM role";
-                                $resultRoles = $conn->query($sqlRoles);
-
-                                while ($rowRole = $resultRoles->fetch_assoc()) {
-                                    echo "<option value='{$rowRole['id']}'>{$rowRole['label']}</option>";
-                                }
-                                ?>
-                            </select>
-
-                            <button class="btn" type="submit" name="submit">Ajouter Membre</button>
-                        </form>
-                    <?php } ?>
                 </div>
                 <ul class="members-list">
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <li class="member">
-                            <div class="member-card">
-                                <?php
-                                if (!function_exists('getBackgroundColor')) {
-                                    function getBackgroundColor($role)
-                                    {
-                                        if ($role === 'Admin') {
-                                            return '#FF991F';
-                                        } elseif ($role === 'User') {
-                                            return '#4bce97';
-                                        } else {
-                                            return '#4bce97';
-                                        }
-                                    }
-                                }
-                                $username = $row["username"];
-                                $firstLetter = strtoupper(substr($username, 0, 1));
-                                $role = $row["role_label"];
-                                ?>
-                                <div class="member-icon" style="background-color: <?= getBackgroundColor($role) ?>;">
-                                    <?= $firstLetter ?>
-                                </div>
-                                <div class="details">
-                                    <p class="username">
-                                        <?= $row["username"] ?>
-                                    </p>
-                                    <p class="role">role:
-                                        <?= $row["role_label"] ?>
-                                    </p>
-                                </div>
+                    <?php foreach ($result as $row): ?>
+                    <li class="member">
+                        <div class="member-card">
+                            <?php
+                            $username = $row["username"];
+                            $firstLetter = strtoupper(substr($username, 0, 1));
+                            $role = $row["role_label"];
+                            ?>
+                            <div class="member-icon" style="background-color: <?= getBackgroundColor($role) ?>;">
+                                <?= $firstLetter ?>
                             </div>
+                            <div class="details">
+                                <p class="username">
+                                    <?= $row["username"] ?>
+                                </p>
+                                <p class="role">role:
+                                    <?= $row["role_label"] ?>
+                                </p>
+                            </div>
+                        </div>
 
-                            <!-- ci-dessous les deux form d'action sur les utilisateurs, uniquement visible par l'admin. Créer condition  -->
-                            <?php if ($isUserAdmin) { ?>
-                                <div class="member-actions">
-                                    <!-- Form to change the role -->
-                                    <form action="./includes/process_member.php" method="post">
-                                        <input type="hidden" name="member_id" value="<?= $row['id'] ?>">
-                                        <button class="btn" type="submit" name="change_role">Changer Rôle</button>
-                                    </form>
+                        <?php if ($isUserAdmin): ?>
+                            <div class="member-actions">
+                                <!-- Form to change the role -->
+                                <form action="./includes/process_member.php" method="post">
+                                    <input type="hidden" name="member_id" value="<?= $row['id'] ?>">
+                                    <button class="btn" type="submit" name="change_role">Changer Rôle</button>
+                                </form>
 
-                                    <!-- Form to delete the member -->
-                                    <form action="./includes/process_member.php" method="post">
-                                        <input type="hidden" name="member_id" value="<?= $row['id'] ?>">
-                                        <button class="btn" type="submit" name="delete_member">Retirer Membre</button>
-                                    </form>
-                                </div>
-                            <?php } ?>
-                        </li>
-                    <?php endwhile; ?>
+                                <!-- Form to delete the member -->
+                                <form action="./includes/process_member.php" method="post">
+                                    <input type="hidden" name="member_id" value="<?= $row['id'] ?>">
+                                    <button class="btn" type="submit" name="delete_member">Retirer Membre</button>
+                                </form>
+                            </div>
+                        <?php endif; ?>
+                    </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
@@ -165,8 +176,3 @@ $result = $conn->query($sql);
 </body>
 
 </html>
-
-<?php
-// Close connection
-$conn->close();
-?>
