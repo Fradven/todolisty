@@ -102,8 +102,8 @@ try {
                     </p>
                 </div>
                 <!-- Ci-dessous, la toolbar contenant le filtre et le form de création d'utilisateur uniquement visible par l'admin  -->
-                <div class="members-toolbar" style="margin-bottom: 1rem;">
                 <?php if ($isUserAdmin): ?>
+                <div class="members-toolbar" style="margin-bottom: 1rem;">
                     <form action="./includes/signup.inc.php" method="post">
                         <input class="members-input" type="text" id="new_username" name="username" placeholder="Nouveau membre" required>
                         <input class="members-input" type="password" name="pwd" placeholder="Mot de passe" required>
