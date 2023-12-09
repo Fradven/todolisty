@@ -3,4 +3,5 @@
 session_start();
 session_unset();
 session_destroy();
-header("location: ../index?logout=success");
+header("Location: ../index?logout=success");
+exit();
