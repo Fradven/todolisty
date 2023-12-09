@@ -14,6 +14,14 @@ if (!isset($_SESSION["usernameid"])) {
             <h1 class="page-title">Todolisty.</h1>
             <h3 class="page-subtitle">Empower your day</h3>
         </div>
+        <?php
+        // Check if a logout message is set
+        if (isset($_SESSION['logout_message'])) {
+            echo '<div class="logout-message">' . $_SESSION['logout_message'] . '</div>';
+            // Unset the logout message to avoid displaying it again on page reload
+            unset($_SESSION['logout_message']);
+        }
+        ?>
         <div id="login-signup-card">
             <div class="tabs">
                 <button id="tab1" onclick="toggleTab('tab1','login-form')" class="tab tab-active">Login</button>
@@ -76,8 +84,6 @@ if (!isset($_SESSION["usernameid"])) {
     <?php
 } else {
 ?>
-<?php } ?>
-
 <main id="main-content">
     <?php include './includes/sidebar.php'; ?>
     <div id="content">
@@ -85,6 +91,7 @@ if (!isset($_SESSION["usernameid"])) {
         <?php include './todo.php'; ?>
     </div>
 </main>
+<?php } ?>
 </body>
 
 </html>

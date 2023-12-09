@@ -18,6 +18,11 @@ if (isset($_POST["submit"])) {
     // Call the loginUser method from LoginContr to process user login
     $login->loginUser();
 
+    if (ob_get_length()) {
+        ob_end_clean();
+    }
+
     // Redirect to index page with a success message (assuming no errors occurred)
     header("location: ../index.php?error=none");
+    exit();
 }
