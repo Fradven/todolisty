@@ -96,7 +96,7 @@ try {
                             <td>
                                 <?= date('d/m/Y H:i', strtotime($task['created_at'])) ?>
                             </td>
-                            <td>
+                            <td class="assigned-to">
                                 <?php
                                 // Déterminez le texte à afficher dans le cercle.
                                 $circleText = 'N/A'; // Texte par défaut si aucun utilisateur n'est assigné
@@ -121,6 +121,7 @@ try {
                                 <div class="member-icon" style="background-color: <?= $backgroundColor ?>;">
                                     <?= htmlspecialchars($circleText) ?>
                                 </div>
+                                <p><?= htmlspecialchars($task['username']) ?></p>
                             </td>
                         </tr>
             </section>
