@@ -17,6 +17,11 @@
     background-color: var(--background-color-sidebar);
 }
 
+.tableau-tasks tbody {
+    max-height: calc(100vh - 23.3rem);
+    overflow-y: scroll;
+}
+
 .tableau-tasks tbody tr:nth-child(odd) {
     background-color: var(--background-color-input);
 }
