@@ -14,8 +14,7 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
 ?>
 
 
-
-<div id="sidebar">
+<div id="sidebar" class="">
     <div class="workspace">
         <a class="workspace-logo link" href="#">T</a>
         <div class="workspace-title">
@@ -80,3 +79,38 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
         
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebar = document.getElementById('sidebar');
+        const workspaceIcon = document.querySelector('.workspace-icon');
+        const content = document.getElementById('content');
+
+        workspaceIcon.addEventListener('click', function () {
+            // Toggle the 'sidebar-open' class on the sidebar
+            sidebar.classList.toggle('sidebar-closed');
+        });
+        
+        // Function to add or remove the class based on screen width
+        function updateSidebarClass() {
+            const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            const isMobile = screenWidth < 740;
+            
+            // Toggle the class based on screen width
+            sidebar.classList.toggle('sidebar-closed', isMobile);
+            
+            if (isMobile) {
+                content.addEventListener('click', function () {
+                    // Toggle the 'sidebar-open' class on the sidebar
+                    sidebar.classList.add('sidebar-closed');
+                });
+            }
+        }
+        
+        // Initial update on page load
+        updateSidebarClass();
+        
+        // Update the class on window resize
+        window.addEventListener('resize', updateSidebarClass);
+        
+    });
+</script>

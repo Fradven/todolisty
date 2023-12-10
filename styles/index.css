@@ -154,7 +154,7 @@ form .form-actions button {
 /* HEADER  */
 
 header {
-    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     background-color: var(--background-color);
@@ -235,6 +235,7 @@ header .logo-img {
 
 .menu-tools {
     display: flex;
+    align-items: center;
     gap: 1.5rem;
     max-width: max-content;
     margin-left: auto;
@@ -295,7 +296,8 @@ header .logo-img {
 }
 
 .infos-btn,
-.account-btn {
+.account-btn,
+.logout-btn {
     padding: 0.7rem;
     border: none;
     border-radius: 50%;
@@ -310,30 +312,25 @@ header .logo-img {
     cursor: pointer;
 }
 
-.infos-icon {
-    height: 1.6rem;
-    width: 1.6rem;
-    border-radius: 50%;
-    border: 2px solid var(--main-color);
-}
-
-.account-btn {
-    padding: 0.4rem;
-}
-
 .account-icon,
+.infos-icon,
 .logout-icon {
     height: 2.2rem;
     width: 2.2rem;
 }
 
+.menu-icon {
+    height: 1.8rem;
+    width: 1.8rem;
+}
+
+.infos-icon {
+    border-radius: 50%;
+    border: 2px solid var(--main-color);
+}
+
 .logout-btn {
-    display: grid;
-    place-items: center;
-    border-radius: 10px;
     background-color: var(--background-selected);
-    padding: 0.5rem 0.5rem;
-    margin-left: 1rem;
 }
 
 .logout-btn:hover {
@@ -344,7 +341,7 @@ header .logo-img {
 
 #main-content {
     display: grid;
-    height: calc(100vh - 5.3rem);
+    height: calc(100vh - 4.7rem);
     grid-template-columns: minmax(0, max-content) auto;
 }
 
@@ -357,13 +354,49 @@ header .logo-img {
     width: 26rem;
     border-right: 1px solid var(--border-color-container);
     background-color: var(--background-color-sidebar);
+    z-index: 100;
+    transition: width 0.3s cubic-bezier(0.36, 0.2, 0.47, 1.21);
+}
+
+#sidebar.sidebar-closed {
+    width: 6rem;
+    transition: width 0.3s cubic-bezier(0.36, 0.2, 0.47, 1.21);
+}
+
+#sidebar.sidebar-closed .sidebar-nav,
+#sidebar.sidebar-closed .trial-infos,
+#sidebar.sidebar-closed .workspace-logo,
+#sidebar.sidebar-closed .workspace-title {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+
+#sidebar.sidebar-closed .workspace {
+    padding: 1rem;
+}
+
+#sidebar.sidebar-closed .workspace-icon {
+    margin-left: 0;
+}
+
+#sidebar.sidebar-closed .workspace-icon .carret-left {
+    transform: rotate(180deg);
+}
+
+#sidebar.sidebar-closed ~ #content {
+    width: calc(100vw - 6rem);
+}
+
+#sidebar.sidebar-closed ~ #content .stats-container {
+    height: 5.9rem;
 }
 
 .workspace {
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--border-color-container);
-    padding: 1rem 2rem;
+    padding: 1rem 1rem 1rem 2rem;
     gap: 1rem;
 }
 
@@ -420,12 +453,12 @@ header .logo-img {
     display: flex;
     padding: 0.5rem;
     border-radius: 5px;
-    background-color: transparent;
+    background-color: var(--background-color-hovered);
     margin-left: auto;
 }
 
 .workspace-icon:hover {
-    background-color: var(--background-color-hovered);
+    filter: brightness(1.8);
 }
 
 .workspace .carret-left:hover {
@@ -643,13 +676,13 @@ body.members-page #content {
     align-items: center;
     height: 6.1rem;
     width: 100%;
-    padding: 0 3rem;
+    padding: 0 1rem;
     background-color: rgba(0, 0, 0, 0.333);
 }
 
 .stats-container h3 {
     color: var(--background-color);
-    background-color: var(--background-color-green-transparent);
+    background-color: var(--background-color-green-bolder);
     padding: 1rem;
     border-radius: 1rem;
 }
@@ -1037,19 +1070,49 @@ select.members-input {
         align-items: flex-start;
         gap: 1rem;
     }
-}
-
-@media screen and (max-width: 950px) {
-    #sidebar {
-        width: min-content;
+    .responsive-menu-btn {
+        display: grid;
     }
     .navbar {
         display: none;
     }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 950px) {
+    #sidebar {
+        width: min-content;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    #sidebar {
+        width: 40vw;
+        background-color: var(--background-color);
+        transition: width 0.3s cubic-bezier(0.36, 0.2, 0.47, 1.21);
+    }
+    #sidebar.sidebar-closed {
+        background-color: var(--background-color-sidebar);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .menu-searchbar {
+        display: none;
+    }
+
+    #sidebar {
+        width: 70vw;
+        background-color: var(--background-color);
+        transition: width 0.3s cubic-bezier(0.36, 0.2, 0.47, 1.21);
+    }
+
     .todo-container {
-        flex-direction: column;
+        padding: 8rem 1rem 1rem;
+    }
+
+    #login-signup-card {
+        top: auto;
+        width: max-content;
+        max-width: max-content;
     }
 }
