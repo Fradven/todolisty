@@ -86,31 +86,34 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
         const content = document.getElementById('content');
 
         workspaceIcon.addEventListener('click', function () {
-            // Toggle the 'sidebar-open' class on the sidebar
             sidebar.classList.toggle('sidebar-closed');
         });
         
-        // Function to add or remove the class based on screen width
         function updateSidebarClass() {
             const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             const isMobile = screenWidth < 740;
             
-            // Toggle the class based on screen width
             sidebar.classList.toggle('sidebar-closed', isMobile);
             
             if (isMobile) {
                 content.addEventListener('click', function () {
-                    // Toggle the 'sidebar-open' class on the sidebar
                     sidebar.classList.add('sidebar-closed');
                 });
             }
         }
         
-        // Initial update on page load
         updateSidebarClass();
-        
-        // Update the class on window resize
         window.addEventListener('resize', updateSidebarClass);
+
+        workspaceIcon.addEventListener('click', function() {
+        let elements = document.querySelectorAll('#sidebar .sidebar-nav, #sidebar .trial-infos, #sidebar .workspace-logo, #sidebar .workspace-title');
+        elements.forEach(function(element, index) {
+        let delay = index * 0.1 + 's';
+        setTimeout(function() {
+            element.style.opacity = element.style.opacity === '0' ? '1' : '0';
+        }, parseFloat(delay) * 1000);
+    });
+    });
         
     });
 </script>
