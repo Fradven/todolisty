@@ -46,6 +46,7 @@ try {
     <div id="content">
         <section>
             <div class="filter-form">
+                <h3>Vue tableur des tâches de l'équipe</h3>
                 <form action="" method="get">
                     <div class="filter-group">
                         <label for="sort">Trier par :</label>

@@ -45,7 +45,7 @@ foreach ($tasks as $task) {
 
 <script src="./js/script.js"></script>
     <div class="stats-container">
-        <h3><?= $totalTasks ?> Tâches</h3>
+        <h3 class="stats-total"><?= $totalTasks ?> Tâches</h3>
     </div>
     <div class="todo-container">
         <div class="todo-card" id="todo">
