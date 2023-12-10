@@ -4,6 +4,8 @@ include './classes/dbh.class.php';
 
 $title = "Tableur - Todolisty";
 $bodyClass = "tableur-page";
+$userRole = $_SESSION["roleid"];
+$username = $_SESSION['username'];
 
 $dbh = new Dbh();
 $pdo = $dbh->connect();
@@ -143,5 +145,8 @@ try {
         </section>
     </div>
 </main>
+<div id="session-username" style="display: none;"><?= $username ?></div>
+<div id="session-role" style="display: none;"><?= $userRole ?></div>
+<script type="text/javascript" src="./js/user-icon.js"></script>
 </body>
 </html>

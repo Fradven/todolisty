@@ -2,6 +2,8 @@
 session_start();
 $title = "Todolisty | Empower Your Day";
 $bodyClass = "home-page";
+$userRole = $_SESSION["roleid"];
+$username = $_SESSION['username'];
 ?>
 <?php include './includes/header.php'; ?>
 <!-- Créer condition (login success) pour afficher soit login (ci-dessous) sans sidebar soit tout sauf login (garder le header dans les deux cas) -->
@@ -91,6 +93,9 @@ if (!isset($_SESSION["usernameid"])) {
         <?php include './todo.php'; ?>
     </div>
 </main>
+<div id="session-username" style="display: none;"><?= $username ?></div>
+<div id="session-role" style="display: none;"><?= $userRole ?></div>
+<script type="text/javascript" src="./js/user-icon.js"></script>
 <?php } ?>
 </body>
 
