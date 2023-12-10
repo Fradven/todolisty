@@ -44,22 +44,22 @@
                 <input class="menu-searchbar-input" type="search" placeholder="Rechercher" maxlength="500">
             </div>
             <ul class="menu-tools-icons">
-                <li>
+                <li class="notif">
                     <button class="btn notif-btn">
                         <img class="notif-icon" src="./assets/images/notification.png" alt="">
                     </button>
                 </li>
-                <li>
+                <li class="infos">
                     <button class="infos-btn">
                         <img class="infos-icon" src="./assets/images/infos.png" alt="">
                     </button>
                 </li>
-                <li>
+                <li class="account">
                     <button class="account-btn">
                         <div id="header-member-icon" class="member-icon"></div>
                     </button>
                 </li>
-                <li>
+                <li class="logout">
                     <form action="./includes/logout.inc.php" method="post">
                         <button type="submit" class="btn logout-btn">
                             <img class="logout-icon" src="./assets/images/logout.png" alt="">
