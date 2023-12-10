@@ -740,7 +740,7 @@ body.members-page #content {
     background-color: rgba(0, 0, 0, 0.333);
 }
 
-.stats-container h3 {
+.stats-container .stats-total {
     color: var(--background-color);
     background-color: var(--background-color-green-bolder);
     padding: 1rem;
@@ -1152,6 +1152,9 @@ select.members-input {
 }
 
 .filter-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 2rem;
     background-color: var(--background-color);
     color: var(--main-color);
@@ -1160,9 +1163,16 @@ select.members-input {
     width: 100%;
 }
 
+.filter-form h3 {
+    padding: 1rem;
+    border-radius: 0.8rem;
+    background-color: var(--background-color-input-hovered);
+}
+
 .filter-form form {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 1rem;
 }
 
@@ -1194,6 +1204,22 @@ select.members-input {
     body.members-page .members-toolbar form select,
     body.members-page .members-toolbar form button {
         width: auto;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .filter-form {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .filter-form h3 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .filter-form form {
+        width: 100%;
+        align-items: flex-end;
     }
 }
 
