@@ -19,6 +19,8 @@ $pdo = $dbh->connect();  // Use the PDO instance returned by the connect method
 $title = "Members - Todolisty";
 $bodyClass = "members-page";
 $isUserAdmin = $_SESSION["roleid"] == 1;
+$userRole = $_SESSION["roleid"];
+$username = $_SESSION['username'];
 
 // Filter the member list with search or else fetch everything
 if (isset($_GET['search']) && !empty($_GET['search'])) {
@@ -109,14 +111,16 @@ try {
                         <input class="members-input" type="password" name="pwd" placeholder="Mot de passe" required>
                         <input class="members-input" type="password" name="pwdrepeat" placeholder="Confirmer mdp" required>
                         <label class="form-label" for="new_role">Rôle</label>
-                        <select class="members-input" id="new_role" name="new_role" required>
-                            <?php
-                            // Fetch and display roles using PDO
-                            foreach ($roles as $rowRole):?>
-                            <option value='<?= $rowRole['id'] ?>'><?= $rowRole['label'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <button class="btn" type="submit" name="submit">Ajouter Membre</button>
+                        <div>
+                            <select class="members-input" id="new_role" name="new_role" required>
+                                <?php
+                                // Fetch and display roles using PDO
+                                foreach ($roles as $rowRole):?>
+                                <option value='<?= $rowRole['id'] ?>'><?= $rowRole['label'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button class="btn" type="submit" name="submit">Ajouter Membre</button>
+                        </div>
                     </form>
                 </div>
                 <?php endif; ?>
@@ -173,6 +177,9 @@ try {
         </div>
     </div>
 </main>
+<div id="session-username" style="display: none;"><?= $username ?></div>
+<div id="session-role" style="display: none;"><?= $userRole ?></div>
+<script type="text/javascript" src="./js/user-icon.js"></script>
 </body>
 
 </html>

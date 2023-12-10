@@ -37,6 +37,11 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
                     <span>Tâches</span>
                 </a>
             </div>
+            <div class="sidebar-closed-link">
+                <a class="link sidebar-closed-btn <?= $class1 ?>" href="<?= $link1_url ?>">
+                    <img class="sidebar-closed-icon" src="./assets/images/bg-min.jpg" alt="">
+                </a>
+            </div>
         </li>
         <li class="sidebar-link">
             <a class="link <?= $class2 ?>" href="<?= $link2_url ?>">
@@ -45,11 +50,21 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
                 <img class="icon-plus" src="./assets/images/plus.png" alt="">
             </a>
         </li>
+        <li class="sidebar-closed-link">
+            <a class="link sidebar-closed-btn <?= $class2 ?>" href="<?= $link2_url ?>">
+                <img class="sidebar-closed-icon" src="./assets/images/user.png" alt="">
+            </a>
+        </li>
         <li class="sidebar-link">
             <a class="link" href="#">
                 <img class="sidebar-nav-icon" src="./assets/images/settings.png" alt="">
                 <span>Paramètres d'espace de travail</span>
                 <img class="icon-carret-down" src="./assets/images/carret-down.png" alt="">
+            </a>
+        </li>
+        <li class="sidebar-closed-link">
+            <a class="link sidebar-closed-btn" href="#">
+                <img class="sidebar-closed-icon" src="./assets/images/settings.png" alt="">
             </a>
         </li>
         <li>
@@ -63,10 +78,20 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
                     <span>Tableur</span>
                 </a>
             </div>
+            <div class="sidebar-closed-link">
+                <a class="link sidebar-closed-btn <?= $class3 ?>" href="<?= $link3_url ?>">
+                    <img class="sidebar-closed-icon" src="./assets/images/tableur.png" alt="">
+                </a>
+            </div>
             <div class="sidebar-link">
                 <a class="link" href="#">
                     <img class="sidebar-nav-icon" src="./assets/images/calendar.png" alt="">
                     <span>Calendrier</span>
+                </a>
+            </div>
+            <div class="sidebar-closed-link">
+                <a class="link sidebar-closed-btn" href="#">
+                    <img class="sidebar-closed-icon" src="./assets/images/calendar.png" alt="">
                 </a>
             </div>
         </li>
@@ -87,6 +112,13 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
 
         workspaceIcon.addEventListener('click', function () {
             sidebar.classList.toggle('sidebar-closed');
+            // let elements = document.querySelectorAll('#sidebar .sidebar-nav, #sidebar .trial-infos, #sidebar .workspace-logo, #sidebar .workspace-title');
+            // elements.forEach(function(element, index) {
+            //      let delay = index * 0.1 + 's';
+            //      setTimeout(function() {
+            //          element.style.opacity = element.style.opacity === '0' ? '1' : '0';
+            //      }, parseFloat(delay) * 1000);
+            // });
         });
         
         function updateSidebarClass() {
@@ -98,22 +130,12 @@ $class3 = ($link3_url == $current_page) ? 'active' : '';
             if (isMobile) {
                 content.addEventListener('click', function () {
                     sidebar.classList.add('sidebar-closed');
-                });
-            }
+                });  
+            }  
         }
         
         updateSidebarClass();
         window.addEventListener('resize', updateSidebarClass);
 
-        workspaceIcon.addEventListener('click', function() {
-        let elements = document.querySelectorAll('#sidebar .sidebar-nav, #sidebar .trial-infos, #sidebar .workspace-logo, #sidebar .workspace-title');
-        elements.forEach(function(element, index) {
-        let delay = index * 0.1 + 's';
-        setTimeout(function() {
-            element.style.opacity = element.style.opacity === '0' ? '1' : '0';
-        }, parseFloat(delay) * 1000);
-    });
-    });
-        
     });
 </script>

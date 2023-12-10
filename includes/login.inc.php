@@ -6,7 +6,7 @@ if (isset($_POST["submit"])) {
     // Retrieve data from the form
     $username = $_POST["username"];
     $pwd = $_POST["pwd"];
-    $pwdrepeat = $_POST["pwdrepeat"];
+    // $pwdrepeat = $_POST["pwdrepeat"];
 
     include "../classes/dbh.class.php";
     include "../classes/login.class.php";

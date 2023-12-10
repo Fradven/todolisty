@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="./styles/tableur.css">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon//apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
@@ -14,6 +13,8 @@
 </head>
 
 <body class="<?= $bodyClass; ?>">
+<?php if (isset($_SESSION["usernameid"])) {
+ ?>   
     <header id="header">
         <a class="logo-link" href="./index.php">
             <img class="logo-img" src="./assets/images/logo-trello-anim.gif" alt="logo" />
@@ -55,7 +56,7 @@
                 </li>
                 <li>
                     <button class="account-btn">
-                        <img class="account-icon" src="./assets/images/account.png" alt="">
+                        <div id="header-member-icon" class="member-icon"></div>
                     </button>
                 </li>
                 <li>
@@ -68,3 +69,4 @@
             </ul>
         </div>
     </header>
+<?php } ?>
